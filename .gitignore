@@ -1,14 +1,21 @@
-#java specific
 *.class
 
-#netbeans ignore personal stuff 
+target/
+build/
+out/
+
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
 nbproject/private/
 
-
-## generic files to ignore
 *~
 *.lock
-*.DS_Store
-*.swp
 *.out
+*.log
+.DS_Store
+*.swp
 
+.plan/
