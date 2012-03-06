@@ -19,6 +19,10 @@ public class CabCatalogSeeder {
     @Autowired
     public CabCatalogSeeder(CabModelRepository repository) {
         this.repository = repository;
+        registerDefaults();
+    }
+
+    protected void registerDefaults() {
     }
 
     public List<CabModel> defaultCatalog() {
