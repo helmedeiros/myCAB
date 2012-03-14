@@ -34,6 +34,7 @@ public class CabCatalogSeeder {
         register("Renault", "Logan", CabCategory.NORMAL);
         register("Chevrolet", "Prisma", CabCategory.NORMAL);
         register("Toyota", "Corolla", CabCategory.CONFORTO);
+        register("Honda", "Civic", CabCategory.CONFORTO);
     }
 
     public List<CabModel> defaultCatalog() {
