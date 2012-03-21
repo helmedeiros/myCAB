@@ -44,6 +44,7 @@ public class CabCatalogSeeder {
         register("Volkswagen", "Passat", CabCategory.CONFORTO);
         register("Honda", "Fit", CabCategory.CONFORTO);
         register("Chevrolet", "Spin", CabCategory.GRANDE);
+        register("Fiat", "Doblo", CabCategory.GRANDE);
     }
 
     public List<CabModel> defaultCatalog() {
