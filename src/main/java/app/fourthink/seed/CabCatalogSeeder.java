@@ -48,6 +48,7 @@ public class CabCatalogSeeder {
         register("Volkswagen", "Touran", CabCategory.GRANDE);
         register("Toyota", "Sienna", CabCategory.GRANDE);
         register("Renault", "Grand Scenic", CabCategory.GRANDE);
+        register("Citroen", "C4 Picasso", CabCategory.GRANDE);
     }
 
     public List<CabModel> defaultCatalog() {
