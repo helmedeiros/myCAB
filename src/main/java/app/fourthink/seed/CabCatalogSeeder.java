@@ -51,6 +51,7 @@ public class CabCatalogSeeder {
         register("Citroen", "C4 Picasso", CabCategory.GRANDE);
         register("Peugeot", "5008", CabCategory.GRANDE);
         register("Kia", "Carens", CabCategory.GRANDE);
+        register("Hyundai", "Tucson", CabCategory.GRANDE);
     }
 
     public List<CabModel> defaultCatalog() {
