@@ -17,8 +17,11 @@ import java.util.List;
 @Transactional
 public class FleetService {
 
-    private final CabRepository cabs;
-    private final CabModelRepository models;
+    private CabRepository cabs;
+    private CabModelRepository models;
+
+    public FleetService() {
+    }
 
     @Autowired
     public FleetService(CabRepository cabs, CabModelRepository models) {
