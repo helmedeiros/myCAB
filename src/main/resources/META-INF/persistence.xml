@@ -10,6 +10,7 @@
         <class>app.fourthink.model.CabModel</class>
         <class>app.fourthink.model.Cab</class>
         <class>app.fourthink.model.Customer</class>
+        <class>app.fourthink.model.Driver</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
