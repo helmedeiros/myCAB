@@ -1,10 +1,13 @@
 package app.fourthink.security;
 
+import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-public final class PasswordHasher {
+@Component
+public class PasswordHasher {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
