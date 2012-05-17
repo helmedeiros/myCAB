@@ -120,6 +120,67 @@ h1 {
 .badge.FREE { background-color: #4cbfb3; }
 .badge.BUSY { background-color: #f49a4f; }
 .badge.OFFLINE { background-color: #b5b5b5; }
+.badge.REQUESTED { background-color: #f08596; }
+.badge.ASSIGNED { background-color: #4cbfb3; }
+.badge.COMPLETED { background-color: #88b04b; }
+.badge.CANCELLED { background-color: #b5b5b5; }
+
+.operator-grid {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 16px 0;
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+.operator-grid .panel {
+    display: table-cell;
+    width: 33%;
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 18px 22px;
+    vertical-align: top;
+}
+
+.operator-grid .panel h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 14px 0;
+    color: #4d4d4d;
+}
+
+.operator-grid .panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.operator-grid .panel li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.operator-grid .panel li:last-child {
+    border-bottom: none;
+}
+
+.alert {
+    background-color: #fde6e1;
+    border: 1px solid #f49a4f;
+    border-radius: 4px;
+    padding: 10px 14px;
+    color: #ad4316;
+    margin-bottom: 16px;
+}
+
+.search input[type="text"] {
+    width: 280px;
+    display: inline-block;
+    margin-right: 8px;
+}
 
 label {
     display: block;
