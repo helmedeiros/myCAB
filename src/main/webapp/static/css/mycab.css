@@ -205,3 +205,77 @@ textarea {
     font-size: 14px;
     background-color: #ffffff;
 }
+
+body.device {
+    background-color: #f0f0ed;
+}
+
+.device-frame {
+    max-width: 380px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.device-header {
+    display: block;
+    background-color: #4cbfb3;
+    color: #ffffff;
+    padding: 18px 22px;
+    text-align: center;
+}
+
+.device-header .brand {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.device-header .plate,
+.device-header .customer {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.device-frame .messages,
+.device-frame .location {
+    padding: 18px 22px;
+}
+
+.device-frame h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #7f7f7f;
+    margin: 0 0 10px 0;
+}
+
+.msg-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.msg-list li {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px 0;
+}
+
+.msg-list time {
+    display: block;
+    font-size: 11px;
+    color: #b5b5b5;
+}
+
+.msg-list p {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+}
+
+.msg-list .empty {
+    color: #b5b5b5;
+    font-style: italic;
+}
