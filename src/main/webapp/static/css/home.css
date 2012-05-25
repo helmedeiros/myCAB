@@ -1,0 +1,128 @@
+body.home {
+    background-color: #f4f1e8;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><rect width='6' height='6' fill='%23f4f1e8'/><path d='M0 6L6 0' stroke='%23e9e2cc' stroke-width='0.6'/></svg>");
+    min-height: 100vh;
+    color: #5a5a5a;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.home-wrap {
+    max-width: 520px;
+    margin: 80px auto 40px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.home-wrap .hero {
+    font-size: 36px;
+    color: #555555;
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+.home-wrap .cta {
+    display: block;
+    background-color: #4cbfb3;
+    color: #ffffff;
+    padding: 18px 24px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 2px 0 #3aa89c;
+}
+
+.home-wrap .cta:hover {
+    background-color: #3aa89c;
+}
+
+.home-wrap .cta .logo {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #ffffff;
+    margin-right: 12px;
+    vertical-align: middle;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.home-wrap .cta.apple .logo {
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M18 17c-1 2-2 4-4 4-1 0-1-1-3-1s-2 1-3 1c-2 0-3-2-4-4-2-3-2-7 1-9 1-1 2-1 3-1s2 1 3 1 2-1 3-1 2 0 3 1c-2 1-3 4-1 6 1 1 2 2 2 3zm-4-14c0 1 0 2-1 3s-2 1-3 1c0-1 0-2 1-3s2-1 3-1z'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M18 17c-1 2-2 4-4 4-1 0-1-1-3-1s-2 1-3 1c-2 0-3-2-4-4-2-3-2-7 1-9 1-1 2-1 3-1s2 1 3 1 2-1 3-1 2 0 3 1c-2 1-3 4-1 6 1 1 2 2 2 3zm-4-14c0 1 0 2-1 3s-2 1-3 1c0-1 0-2 1-3s2-1 3-1z'/></svg>");
+}
+
+.home-wrap .or {
+    margin: 30px 0 18px;
+    display: flex;
+    align-items: center;
+    color: #b5b5b5;
+    font-size: 14px;
+}
+
+.home-wrap .or::before,
+.home-wrap .or::after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    background: #d8d2c1;
+    margin: 0 14px;
+}
+
+.home-wrap .signup {
+    font-size: 22px;
+    color: #555555;
+    font-weight: 600;
+    margin: 0 0 20px;
+}
+
+.home-wrap .balloon {
+    margin: 18px 0 18px;
+}
+
+.home-wrap .signup-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4cbfb3;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dashed #4cbfb3;
+}
+
+.home-wrap .safety {
+    margin: 36px 0 10px;
+}
+
+.home-wrap .safety a {
+    color: #7f7f7f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.home-wrap .safety .shield {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #7f7f7f;
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l8 4v6c0 5-3 9-8 10-5-1-8-5-8-10V6l8-4z' fill='%23000'/><polygon points='12,7 13,10 16,10 14,12 15,15 12,13 9,15 10,12 8,10 11,10' fill='%23fff'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l8 4v6c0 5-3 9-8 10-5-1-8-5-8-10V6l8-4z'/></svg>");
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.home-wrap footer {
+    margin-top: 50px;
+    font-size: 13px;
+    color: #b5b5b5;
+}
+
+.home-wrap footer a {
+    color: #b5b5b5;
+    text-decoration: none;
+    margin: 0 4px;
+}
+
+.home-wrap footer a:hover {
+    color: #4cbfb3;
+}
