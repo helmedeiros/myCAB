@@ -71,4 +71,16 @@ public class FleetService {
     public void deregister(Long id) {
         cabs.delete(get(id));
     }
+
+    public FleetStats stats() {
+        int free = 0, busy = 0, offline = 0;
+        for (Cab cab : cabs.findAll()) {
+            switch (cab.getStatus()) {
+                case FREE: free++; break;
+                case BUSY: busy++; break;
+                case OFFLINE: offline++; break;
+            }
+        }
+        return new FleetStats(free + busy + offline, free, busy, offline);
+    }
 }
