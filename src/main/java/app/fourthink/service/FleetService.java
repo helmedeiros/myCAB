@@ -56,6 +56,10 @@ public class FleetService {
         return cabs.findByStatus(CabStatus.FREE);
     }
 
+    public List<Cab> listByStatus(CabStatus status) {
+        return cabs.findByStatus(status);
+    }
+
     public Cab updateStatus(Long id, CabStatus status) {
         Cab cab = get(id);
         cab.setStatus(status);
