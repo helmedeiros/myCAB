@@ -93,6 +93,14 @@ public class DispatchService {
         return dispatches.findActive();
     }
 
+    public List<Dispatch> forCustomer(Long customerId) {
+        return dispatches.findByCustomerId(customerId);
+    }
+
+    public List<Dispatch> forCab(Long cabId) {
+        return dispatches.findByCabId(cabId);
+    }
+
     public Dispatch find(Long id) {
         Dispatch d = dispatches.findById(id);
         if (d == null) {
