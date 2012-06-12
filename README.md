@@ -11,3 +11,5 @@ O sistema permite ao operador receber chamadas, localizar o carro mais proximo e
 
 
 ## Tecnologia
+
+- Java 7
