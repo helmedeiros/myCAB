@@ -9,3 +9,5 @@ myCAB e uma central de chamadas de taxi com cadastro de frota, clientes, motoris
 O sistema permite ao operador receber chamadas, localizar o carro mais proximo e despachar.
 
 
+
+## Tecnologia
