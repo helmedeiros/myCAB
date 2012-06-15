@@ -19,3 +19,5 @@ O sistema permite ao operador receber chamadas, localizar o carro mais proximo e
 - Hibernate 3.6 (JPA) sobre H2
 
 - JSP + JSTL para views
+
+- jQuery 1.7 para polling de mensagens
