@@ -21,3 +21,5 @@ O sistema permite ao operador receber chamadas, localizar o carro mais proximo e
 - JSP + JSTL para views
 
 - jQuery 1.7 para polling de mensagens
+
+- Maven 3 com Jetty 9 embarcado
