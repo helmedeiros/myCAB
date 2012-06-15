@@ -17,3 +17,5 @@ O sistema permite ao operador receber chamadas, localizar o carro mais proximo e
 - Spring 3.0.5 (core, web, mvc, orm)
 
 - Hibernate 3.6 (JPA) sobre H2
+
+- JSP + JSTL para views
