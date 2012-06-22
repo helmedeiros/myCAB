@@ -43,3 +43,5 @@ O sistema permite ao operador receber chamadas, localizar o carro mais proximo e
     mvn jetty:run
 
 
+
+A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
