@@ -47,3 +47,5 @@ O sistema permite ao operador receber chamadas, localizar o carro mais proximo e
 A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 
 
+
+## Uso
