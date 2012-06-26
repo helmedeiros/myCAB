@@ -49,3 +49,5 @@ A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 
 
 ## Uso
+
+1. Acesse / para a tela inicial.
