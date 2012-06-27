@@ -55,3 +55,5 @@ A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 2. Acesse /signup para se cadastrar como motorista.
 
 3. Acesse /operator para a central de chamadas.
+
+4. Acesse /cabs para gerenciar a frota.
