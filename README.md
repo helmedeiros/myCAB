@@ -57,3 +57,5 @@ A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 3. Acesse /operator para a central de chamadas.
 
 4. Acesse /cabs para gerenciar a frota.
+
+5. Acesse /customers para gerenciar clientes.
