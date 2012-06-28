@@ -59,3 +59,5 @@ A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 4. Acesse /cabs para gerenciar a frota.
 
 5. Acesse /customers para gerenciar clientes.
+
+6. Acesse /cab/{id} para a tela do motorista no veiculo.
