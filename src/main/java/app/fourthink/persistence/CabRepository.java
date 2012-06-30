@@ -20,4 +20,6 @@ public interface CabRepository {
     void delete(Cab cab);
 
     long count();
+
+    long countFreeWithLocation();
 }
