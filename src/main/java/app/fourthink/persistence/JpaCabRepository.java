@@ -65,6 +65,12 @@ public class JpaCabRepository implements CabRepository {
     }
 
     @Override
+    public long countFreeWithLocation() {
+        return em.createQuery("select count(c) from Cab c where c.status = 'FREE' and c.latitude is not null", Long.class)
+                .getSingleResult();
+    }
+
+    @Override
     public long count() {
         return em.createQuery("select count(c) from Cab c", Long.class)
                 .getSingleResult();
