@@ -76,6 +76,10 @@ public class FleetService {
         cabs.delete(get(id));
     }
 
+    public long readyCabCount() {
+        return cabs.countFreeWithLocation();
+    }
+
     public FleetStats stats() {
         int free = 0, busy = 0, offline = 0;
         for (Cab cab : cabs.findAll()) {
