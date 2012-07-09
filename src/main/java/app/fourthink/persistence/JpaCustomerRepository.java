@@ -69,4 +69,12 @@ public class JpaCustomerRepository implements CustomerRepository {
         return em.createQuery("select count(c) from Customer c", Long.class)
                 .getSingleResult();
     }
+
+    @Override
+    public List<Customer> findRecent(int limit) {
+        TypedQuery<Customer> q = em.createQuery(
+                "select c from Customer c order by c.id desc", Customer.class);
+        q.setMaxResults(limit);
+        return q.getResultList();
+    }
 }
