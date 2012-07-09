@@ -44,6 +44,10 @@ public class CustomerService {
         return customers.findAll();
     }
 
+    public List<Customer> recent(int limit) {
+        return customers.findRecent(limit);
+    }
+
     public List<Customer> search(String fragment) {
         if (fragment == null || fragment.trim().isEmpty()) {
             return customers.findAll();

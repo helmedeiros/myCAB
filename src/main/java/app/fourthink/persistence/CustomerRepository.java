@@ -19,4 +19,6 @@ public interface CustomerRepository {
     void delete(Customer customer);
 
     long count();
+
+    java.util.List<app.fourthink.model.Customer> findRecent(int limit);
 }
