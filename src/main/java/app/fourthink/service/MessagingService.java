@@ -23,6 +23,10 @@ public class MessagingService {
         this.messages = messages;
     }
 
+    public Message send(app.fourthink.model.RecipientAddress address, String body) {
+        return send(address.getKind(), address.getId(), body);
+    }
+
     public Message send(RecipientKind kind, Long recipientId, String body) {
         if (body == null || body.trim().isEmpty()) {
             throw new IllegalArgumentException("message body required");
