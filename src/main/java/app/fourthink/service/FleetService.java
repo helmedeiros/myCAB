@@ -52,6 +52,14 @@ public class FleetService {
         return cabs.findAll();
     }
 
+    public java.util.List<app.fourthink.model.CabSummary> listSummaries() {
+        java.util.List<app.fourthink.model.CabSummary> out = new java.util.ArrayList<app.fourthink.model.CabSummary>();
+        for (Cab cab : cabs.findAll()) {
+            out.add(app.fourthink.model.CabSummary.of(cab));
+        }
+        return out;
+    }
+
     public List<Cab> listFree() {
         return cabs.findByStatus(CabStatus.FREE);
     }
