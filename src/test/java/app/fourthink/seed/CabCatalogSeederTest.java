@@ -80,5 +80,13 @@ public class CabCatalogSeederTest {
         public long count() {
             return store.size();
         }
+
+        public List<CabModel> searchByMake(String make) {
+            List<CabModel> out = new ArrayList<CabModel>();
+            for (CabModel m : store) {
+                if (m.getMake().toLowerCase().contains(make.toLowerCase())) out.add(m);
+            }
+            return out;
+        }
     }
 }
