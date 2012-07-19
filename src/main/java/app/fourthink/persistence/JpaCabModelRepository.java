@@ -52,4 +52,13 @@ public class JpaCabModelRepository implements CabModelRepository {
         return em.createQuery("select count(m) from CabModel m", Long.class)
                 .getSingleResult();
     }
+
+    @Override
+    public List<CabModel> searchByMake(String make) {
+        TypedQuery<CabModel> q = em.createQuery(
+                "select m from CabModel m where lower(m.make) like :v order by m.make, m.model",
+                CabModel.class);
+        q.setParameter("v", "%" + make.toLowerCase() + "%");
+        return q.getResultList();
+    }
 }

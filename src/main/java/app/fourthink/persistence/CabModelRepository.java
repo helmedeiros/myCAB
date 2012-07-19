@@ -16,4 +16,6 @@ public interface CabModelRepository {
     List<CabModel> findByCategory(CabCategory category);
 
     long count();
+
+    java.util.List<app.fourthink.model.CabModel> searchByMake(String make);
 }
