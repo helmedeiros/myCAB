@@ -101,6 +101,27 @@ public class DispatchService {
         return dispatches.findByCabId(cabId);
     }
 
+    public Dispatch reassign(Long dispatchId) {
+        Dispatch dispatch = find(dispatchId);
+        Cab previous = dispatch.getAssignedCab();
+        if (previous != null) {
+            previous.setStatus(CabStatus.FREE);
+            cabs.save(previous);
+        }
+        Cab next = finder.findClosest(dispatch.getPickup(), dispatch.getRequestedCategory());
+        if (next == null) {
+            throw new IllegalStateException("no replacement cab available");
+        }
+        dispatch.cancel();
+        Dispatch fresh = new Dispatch(dispatch.getCustomer(), dispatch.getPickup(),
+                dispatch.getPickupAddress(), dispatch.getRequestedCategory());
+        fresh.assignTo(next);
+        next.setStatus(CabStatus.BUSY);
+        cabs.save(next);
+        dispatches.save(dispatch);
+        return dispatches.save(fresh);
+    }
+
     public Dispatch find(Long id) {
         Dispatch d = dispatches.findById(id);
         if (d == null) {
