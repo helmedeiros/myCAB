@@ -43,6 +43,10 @@ public class MessagingService {
         return unread;
     }
 
+    public long unreadCount(RecipientKind kind, Long recipientId) {
+        return messages.findUnread(kind, recipientId).size();
+    }
+
     public List<Message> recent(RecipientKind kind, Long recipientId, int limit) {
         return messages.findRecent(kind, recipientId, limit);
     }
