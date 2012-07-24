@@ -43,6 +43,15 @@ public class MessageApiController {
         return out;
     }
 
+    @RequestMapping(value = "/{kind}/{id}/unread", method = RequestMethod.GET)
+    @ResponseBody
+    public java.util.Map<String, Object> unread(@PathVariable("kind") RecipientKind kind,
+                                                  @PathVariable("id") Long id) {
+        java.util.Map<String, Object> out = new java.util.HashMap<String, Object>();
+        out.put("unread", messaging.unreadCount(kind, id));
+        return out;
+    }
+
     @RequestMapping(value = "/{kind}/{id}", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> send(@PathVariable("kind") RecipientKind kind,
