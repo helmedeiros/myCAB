@@ -17,4 +17,6 @@ public interface DriverRepository {
     List<Driver> findAll();
 
     long count();
+
+    java.util.List<app.fourthink.model.Driver> findByCategory(app.fourthink.model.CabCategory category);
 }

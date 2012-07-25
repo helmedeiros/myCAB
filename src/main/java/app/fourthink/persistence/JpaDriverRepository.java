@@ -52,6 +52,15 @@ public class JpaDriverRepository implements DriverRepository {
         return em.createQuery("select count(d) from Driver d", Long.class).getSingleResult();
     }
 
+    @Override
+    public List<Driver> findByCategory(app.fourthink.model.CabCategory category) {
+        TypedQuery<Driver> q = em.createQuery(
+                "select d from Driver d where d.preferredCategory = :c order by d.fullName",
+                Driver.class);
+        q.setParameter("c", category);
+        return q.getResultList();
+    }
+
     private Driver singleOrNull(String jpql, String value) {
         TypedQuery<Driver> q = em.createQuery(jpql, Driver.class);
         q.setParameter("v", value);
