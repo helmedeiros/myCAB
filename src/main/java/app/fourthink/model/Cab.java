@@ -72,6 +72,10 @@ public class Cab {
         return new Location(latitude, longitude);
     }
 
+    public boolean hasLocation() {
+        return latitude != null && longitude != null;
+    }
+
     public void updateLocation(Location location) {
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
