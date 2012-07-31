@@ -53,6 +53,10 @@ public class Customer {
         this.phone = phone.getValue();
     }
 
+    public boolean hasDefaultAddress() {
+        return defaultAddress != null && !defaultAddress.trim().isEmpty();
+    }
+
     public String getDefaultAddress() {
         return defaultAddress;
     }
