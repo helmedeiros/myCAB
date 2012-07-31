@@ -27,7 +27,7 @@ public class NearestCabFinder {
         double bestKm = Double.MAX_VALUE;
         for (Cab cab : free) {
             if (cab.getModel().getCategory() != category) continue;
-            if (cab.getLocation() == null) continue;
+            if (!cab.hasLocation()) continue;
             double km = Distance.kilometers(pickup, cab.getLocation());
             if (km < bestKm) {
                 bestKm = km;
