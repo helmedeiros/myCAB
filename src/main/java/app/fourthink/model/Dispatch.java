@@ -89,6 +89,14 @@ public class Dispatch {
         return status;
     }
 
+    public boolean isAssigned() {
+        return status == DispatchStatus.ASSIGNED;
+    }
+
+    public boolean isOpen() {
+        return status == DispatchStatus.REQUESTED || status == DispatchStatus.ASSIGNED;
+    }
+
     public Cab getAssignedCab() {
         return assignedCab;
     }
