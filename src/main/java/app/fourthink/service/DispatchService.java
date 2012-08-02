@@ -90,6 +90,10 @@ public class DispatchService {
         return dispatches.save(dispatch);
     }
 
+    public long activeCount() {
+        return dispatches.findActive().size();
+    }
+
     public List<Dispatch> active() {
         return dispatches.findActive();
     }
