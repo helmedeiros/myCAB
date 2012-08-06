@@ -65,3 +65,5 @@ A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 7. Acesse /customer/{id} para a tela do cliente.
 
 introduce catalog readme section
+
+explain catalog defaults
