@@ -69,3 +69,5 @@ A aplicacao sobe em http://localhost:8080 com banco H2 em memoria.
 O catalogo padrao popula 30 modelos populares no Brasil em 2012, divididos em tres categorias.
 
 
+
+### NORMAL
