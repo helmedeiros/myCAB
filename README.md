@@ -91,3 +91,5 @@ Chevrolet Spin, Fiat Doblo, Volkswagen Touran, Toyota Sienna, Renault Grand Scen
 ## API de mensagens
 
 Clientes e veiculos consultam a propria fila com GET /api/messages/{kind}/{id} para drenar mensagens nao lidas.
+
+Para apenas a contagem nao lida sem marcar como lida: GET /api/messages/{kind}/{id}/unread.
