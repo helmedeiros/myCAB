@@ -97,3 +97,5 @@ Para apenas a contagem nao lida sem marcar como lida: GET /api/messages/{kind}/{
 Para enviar uma mensagem ao destinatario: POST /api/messages/{kind}/{id} com body no formulario.
 
 Os papeis suportados sao CAB, CUSTOMER e OPERATOR.
+
+
