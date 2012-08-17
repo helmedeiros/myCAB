@@ -99,3 +99,5 @@ Para enviar uma mensagem ao destinatario: POST /api/messages/{kind}/{id} com bod
 Os papeis suportados sao CAB, CUSTOMER e OPERATOR.
 
 
+
+## Arquitetura
