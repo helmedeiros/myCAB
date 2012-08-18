@@ -101,3 +101,5 @@ Os papeis suportados sao CAB, CUSTOMER e OPERATOR.
 
 
 ## Arquitetura
+
+Camadas: model (entidades JPA e value objects), persistence (repositorios), service (regras de negocio), controllers (Spring MVC).
