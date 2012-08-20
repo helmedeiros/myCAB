@@ -105,3 +105,5 @@ Os papeis suportados sao CAB, CUSTOMER e OPERATOR.
 Camadas: model (entidades JPA e value objects), persistence (repositorios), service (regras de negocio), controllers (Spring MVC).
 
 Mensagens entre central, motoristas e clientes circulam pela tabela message com flag de leitura.
+
+O finder de carro mais proximo usa haversine sobre os carros FREE da categoria solicitada.
