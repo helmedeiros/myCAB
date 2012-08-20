@@ -103,3 +103,5 @@ Os papeis suportados sao CAB, CUSTOMER e OPERATOR.
 ## Arquitetura
 
 Camadas: model (entidades JPA e value objects), persistence (repositorios), service (regras de negocio), controllers (Spring MVC).
+
+Mensagens entre central, motoristas e clientes circulam pela tabela message com flag de leitura.
