@@ -109,3 +109,5 @@ Mensagens entre central, motoristas e clientes circulam pela tabela message com 
 O finder de carro mais proximo usa haversine sobre os carros FREE da categoria solicitada.
 
 
+
+## Estatisticas
