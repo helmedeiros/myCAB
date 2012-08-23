@@ -115,3 +115,5 @@ O finder de carro mais proximo usa haversine sobre os carros FREE da categoria s
 GET /api/stats retorna contadores de frota, despachos ativos, carros prontos e motoristas.
 
 
+
+## Testes locais
