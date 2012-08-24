@@ -117,3 +117,5 @@ GET /api/stats retorna contadores de frota, despachos ativos, carros prontos e m
 
 
 ## Testes locais
+
+A bateria roda em poucos segundos com H2 em memoria. Use mvn test antes de cada commit.
