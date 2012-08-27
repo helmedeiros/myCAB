@@ -31,6 +31,15 @@ public class CabDeviceController {
         return "device/cab";
     }
 
+    @org.springframework.web.bind.annotation.ResponseBody
+    @RequestMapping(value = "/{id}/location.json", method = RequestMethod.POST)
+    public app.fourthink.model.Coordinates updateLocationJson(@PathVariable Long id,
+                                  @RequestParam("latitude") double latitude,
+                                  @RequestParam("longitude") double longitude) {
+        fleet.updateLocation(id, latitude, longitude);
+        return new app.fourthink.model.Coordinates(latitude, longitude);
+    }
+
     @RequestMapping(value = "/{id}/location", method = RequestMethod.POST)
     public String updateLocation(@PathVariable Long id,
                                   @RequestParam("latitude") double latitude,
