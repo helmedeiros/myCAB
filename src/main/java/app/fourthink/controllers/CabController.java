@@ -56,6 +56,14 @@ public class CabController {
         return "redirect:/cabs";
     }
 
+    @RequestMapping(value = "/{id}/location", method = RequestMethod.POST)
+    public String updateLocation(@PathVariable Long id,
+                                  @RequestParam("latitude") double latitude,
+                                  @RequestParam("longitude") double longitude) {
+        fleet.updateLocation(id, latitude, longitude);
+        return "redirect:/cabs";
+    }
+
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public String delete(@PathVariable Long id) {
         fleet.deregister(id);
