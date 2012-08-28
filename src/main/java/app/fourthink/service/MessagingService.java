@@ -34,6 +34,14 @@ public class MessagingService {
         return messages.save(new Message(kind, recipientId, body.trim()));
     }
 
+    public Message broadcast(RecipientKind kind, List<Long> recipientIds, String body) {
+        Message last = null;
+        for (Long id : recipientIds) {
+            last = send(kind, id, body);
+        }
+        return last;
+    }
+
     public List<Message> drain(RecipientKind kind, Long recipientId) {
         List<Message> unread = messages.findUnread(kind, recipientId);
         for (Message m : unread) {
