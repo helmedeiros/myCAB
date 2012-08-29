@@ -117,6 +117,7 @@ h1 {
     color: #ffffff;
 }
 
+.badge { transition: background-color 0.2s ease; }
 .badge.FREE { background-color: #4cbfb3; }
 .badge.BUSY { background-color: #f49a4f; }
 .badge.OFFLINE { background-color: #b5b5b5; }
