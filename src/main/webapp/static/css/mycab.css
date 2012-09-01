@@ -53,6 +53,12 @@ html, body {
     padding: 0 20px;
 }
 
+.container > h1 + p {
+    color: #7f7f7f;
+    margin-top: -10px;
+    margin-bottom: 24px;
+}
+
 .container.narrow {
     max-width: 480px;
 }
