@@ -18,6 +18,7 @@
 </div>
 <div class="container">
     <h1>Frota</h1>
+<p>Cadastre e acompanhe os carros disponiveis na central.</p>
     <p><a class="btn primary" href="<c:url value='/cabs/new'/>">Cadastrar carro</a></p>
     <table class="table">
         <thead>
