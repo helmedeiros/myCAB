@@ -18,6 +18,7 @@
 </div>
 <div class="container">
     <h1>Chamadas ativas</h1>
+<p>Despache para o carro mais proximo ou cancele rapidamente.</p>
     <p><a class="btn primary" href="<c:url value='/dispatches/new'/>">Nova chamada</a></p>
     <table class="table">
         <thead>
