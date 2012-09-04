@@ -18,6 +18,7 @@
 </div>
 <div class="container">
     <h1>Clientes</h1>
+<p>Pesquise rapidamente e cadastre novos clientes.</p>
     <form method="get" action="<c:url value='/customers'/>" class="search">
         <input type="text" name="q" placeholder="Buscar por nome" value="${query}"/>
         <button class="btn" type="submit">Buscar</button>
