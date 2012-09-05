@@ -19,6 +19,7 @@
 </div>
 <div class="container">
     <h1>Central de operacoes</h1>
+<p>Visao geral em tempo real da frota e das chamadas em andamento.</p>
     <div class="operator-grid">
         <section class="panel">
             <h2>Chamadas ativas</h2>
