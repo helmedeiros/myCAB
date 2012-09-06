@@ -73,6 +73,10 @@ public class Driver {
         return passwordHash;
     }
 
+    public boolean hasEmail(String candidate) {
+        return candidate != null && email.equalsIgnoreCase(candidate);
+    }
+
     public CabCategory getPreferredCategory() {
         return preferredCategory;
     }
