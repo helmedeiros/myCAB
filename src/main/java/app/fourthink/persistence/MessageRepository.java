@@ -12,4 +12,6 @@ public interface MessageRepository {
     List<Message> findUnread(RecipientKind kind, Long recipientId);
 
     List<Message> findRecent(RecipientKind kind, Long recipientId, int limit);
+
+    long count();
 }

@@ -46,4 +46,9 @@ public class JpaMessageRepository implements MessageRepository {
         q.setMaxResults(limit);
         return q.getResultList();
     }
+
+    @Override
+    public long count() {
+        return em.createQuery("select count(m) from Message m", Long.class).getSingleResult();
+    }
 }
