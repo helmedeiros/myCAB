@@ -16,6 +16,9 @@ html, body {
     background-color: #ffffff;
     border-bottom: 1px solid #e5e5e5;
     padding: 14px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .navbar .brand {
