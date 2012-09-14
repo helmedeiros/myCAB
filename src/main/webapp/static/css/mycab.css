@@ -183,6 +183,15 @@ h1 {
     border-bottom: none;
 }
 
+.success {
+    background-color: #e7f3e2;
+    border: 1px solid #88b04b;
+    border-radius: 4px;
+    padding: 10px 14px;
+    color: #4d6a30;
+    margin-bottom: 16px;
+}
+
 .alert {
     background-color: #fde6e1;
     border: 1px solid #f49a4f;
