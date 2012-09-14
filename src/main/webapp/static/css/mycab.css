@@ -208,6 +208,16 @@ label {
     font-weight: 600;
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #4cbfb3;
+    box-shadow: 0 0 0 3px rgba(76, 191, 179, 0.2);
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"],
