@@ -10,8 +10,9 @@
 <body>
 <div class="navbar"><a class="brand" href="<c:url value='/'/>">myCAB</a></div>
 <div class="container narrow signup-success">
-    <h1>Cadastro recebido</h1>
-    <p>Obrigado por se cadastrar. A central entrara em contato para os proximos passos.</p>
+    <div class="success">Cadastro recebido com sucesso.</div>
+    <h1>Pronto para rodar</h1>
+    <p>A central entrara em contato para os proximos passos.</p>
     <p><a class="btn primary" href="<c:url value='/'/>">Voltar ao inicio</a></p>
 </div>
 </body>
