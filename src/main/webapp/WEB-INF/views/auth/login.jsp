@@ -19,7 +19,7 @@
         <input type="email" name="email" required/>
 
         <label>Senha</label>
-        <input type="password" name="password" required/>
+        <input type="password" name="password" minlength="6" required/>
 
         <p>
             <button class="btn primary" type="submit">Entrar</button>
