@@ -55,4 +55,8 @@ public class CabModel {
     public String displayName() {
         return make + " " + model;
     }
+
+    public String fullLabel() {
+        return displayName() + " (" + CabKind.label(category) + ")";
+    }
 }
