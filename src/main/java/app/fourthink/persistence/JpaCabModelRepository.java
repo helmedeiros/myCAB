@@ -61,4 +61,14 @@ public class JpaCabModelRepository implements CabModelRepository {
         q.setParameter("v", "%" + make.toLowerCase() + "%");
         return q.getResultList();
     }
+
+    @Override
+    public List<CabModel> findByCategoryAndMake(app.fourthink.model.CabCategory category, String make) {
+        TypedQuery<CabModel> q = em.createQuery(
+                "select m from CabModel m where m.category = :c and lower(m.make) like :v order by m.make, m.model",
+                CabModel.class);
+        q.setParameter("c", category);
+        q.setParameter("v", "%" + make.toLowerCase() + "%");
+        return q.getResultList();
+    }
 }

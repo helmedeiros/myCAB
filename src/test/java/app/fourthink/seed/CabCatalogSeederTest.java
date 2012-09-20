@@ -81,6 +81,16 @@ public class CabCatalogSeederTest {
             return store.size();
         }
 
+        public List<CabModel> findByCategoryAndMake(CabCategory category, String make) {
+            List<CabModel> out = new ArrayList<CabModel>();
+            for (CabModel m : store) {
+                if (m.getCategory() == category && m.getMake().toLowerCase().contains(make.toLowerCase())) {
+                    out.add(m);
+                }
+            }
+            return out;
+        }
+
         public List<CabModel> searchByMake(String make) {
             List<CabModel> out = new ArrayList<CabModel>();
             for (CabModel m : store) {
