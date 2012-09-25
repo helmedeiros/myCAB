@@ -127,6 +127,14 @@ public class DispatchService {
         return dispatches.save(fresh);
     }
 
+    public long completedCount() {
+        long count = 0;
+        for (Dispatch d : dispatches.findActive()) {
+            if (d.getStatus() == app.fourthink.model.DispatchStatus.COMPLETED) count++;
+        }
+        return count;
+    }
+
     public Dispatch find(Long id) {
         Dispatch d = dispatches.findById(id);
         if (d == null) {
