@@ -22,11 +22,10 @@ public class DriverHomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(HttpSession session, Model model) {
-        Long driverId = (Long) session.getAttribute(LoginController.SESSION_DRIVER_ID);
-        if (driverId == null) {
+        if (!app.fourthink.security.SessionGate.isAuthenticated(session)) {
             return "redirect:/login";
         }
-        model.addAttribute("driver", drivers.findById(driverId));
+        model.addAttribute("driver", drivers.findById(app.fourthink.security.SessionGate.driverId(session)));
         return "drivers/home";
     }
 }
