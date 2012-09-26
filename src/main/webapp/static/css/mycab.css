@@ -1,5 +1,14 @@
 * { box-sizing: border-box; }
 
+@media (max-width: 640px) {
+    .navbar { padding: 10px 16px; }
+    .navbar .nav li { margin-right: 10px; }
+    .container { padding: 0 16px; }
+    .operator-grid { display: block; }
+    .operator-grid .panel { display: block; width: 100%; margin-bottom: 16px; }
+    .table th, .table td { padding: 8px 10px; font-size: 13px; }
+}
+
 html, body {
     margin: 0;
     padding: 0;
