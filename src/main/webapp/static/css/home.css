@@ -6,6 +6,12 @@
     clip: rect(0, 0, 0, 0);
 }
 
+@media (max-width: 480px) {
+    .home-wrap { margin-top: 40px; }
+    .home-wrap .hero { font-size: 28px; }
+    .home-wrap .cta { font-size: 16px; padding: 14px 18px; }
+}
+
 body.home {
     background-color: #f4f1e8;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><rect width='6' height='6' fill='%23f4f1e8'/><path d='M0 6L6 0' stroke='%23e9e2cc' stroke-width='0.6'/></svg>");
