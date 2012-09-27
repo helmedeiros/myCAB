@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>myCAB - seu amigo com um carro</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/mycab.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/home.css'/>"/>
