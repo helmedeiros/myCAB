@@ -34,10 +34,11 @@ public class MessageApiController {
         List<Message> messages = messaging.drain(kind, id);
         List<Map<String, Object>> out = new ArrayList<Map<String, Object>>();
         for (Message m : messages) {
+            app.fourthink.model.MessagePayload payload = app.fourthink.model.MessagePayload.of(m);
             Map<String, Object> entry = new HashMap<String, Object>();
-            entry.put("id", m.getId());
-            entry.put("body", m.getBody());
-            entry.put("createdAt", m.getCreatedAt().getTime());
+            entry.put("id", payload.getId());
+            entry.put("body", payload.getBody());
+            entry.put("createdAt", payload.getCreatedAt());
             out.add(entry);
         }
         return out;
