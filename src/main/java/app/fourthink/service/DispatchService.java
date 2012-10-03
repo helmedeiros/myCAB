@@ -127,6 +127,14 @@ public class DispatchService {
         return dispatches.save(fresh);
     }
 
+    public java.util.List<app.fourthink.model.DispatchSummary> activeSummaries() {
+        java.util.List<app.fourthink.model.DispatchSummary> out = new java.util.ArrayList<app.fourthink.model.DispatchSummary>();
+        for (Dispatch d : dispatches.findActive()) {
+            out.add(app.fourthink.model.DispatchSummary.of(d));
+        }
+        return out;
+    }
+
     public long completedCount() {
         long count = 0;
         for (Dispatch d : dispatches.findActive()) {
