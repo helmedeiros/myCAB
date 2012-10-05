@@ -42,6 +42,7 @@ public class StatsApiController {
         out.put("readyCabs", fleet.readyCabCount());
         out.put("driverCount", drivers.count());
         out.put("timestamp", System.currentTimeMillis());
+        out.put("activeDispatchSummaries", dispatches.activeSummaries());
         return out;
     }
 }
