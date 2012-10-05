@@ -1,4 +1,5 @@
 * { box-sizing: border-box; }
+*::after, *::before { box-sizing: border-box; }
 
 @media (max-width: 640px) {
     .navbar { padding: 10px 16px; }
