@@ -121,3 +121,5 @@ GET /api/stats retorna contadores de frota, despachos ativos, carros prontos e m
 A bateria roda em poucos segundos com H2 em memoria. Use mvn test antes de cada commit.
 
 ## Convencoes
+
+Commits Conventional: feat, fix, refactor, test, build, chore, docs, style.
