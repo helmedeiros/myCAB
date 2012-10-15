@@ -125,3 +125,5 @@ A bateria roda em poucos segundos com H2 em memoria. Use mvn test antes de cada 
 Commits Conventional: feat, fix, refactor, test, build, chore, docs, style.
 
 Codigo sem comentarios; o que precisa de explicacao precisa ser renomeado.
+
+Testes locais (mvn test) precisam passar antes de qualquer commit.
