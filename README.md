@@ -131,3 +131,5 @@ Testes locais (mvn test) precisam passar antes de qualquer commit.
 
 
 ## Seguranca
+
+Senhas de motoristas sao guardadas como hash SHA-256 com salt aleatorio de 16 bytes.
