@@ -137,3 +137,5 @@ Senhas de motoristas sao guardadas como hash SHA-256 com salt aleatorio de 16 by
 Sessao de motorista ao logar fica em HttpSession com chave driverId.
 
 Mensagens enviadas pela central nao sao apagadas para auditoria; apenas marcadas como lidas.
+
+
