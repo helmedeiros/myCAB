@@ -145,3 +145,5 @@ Mensagens enviadas pela central nao sao apagadas para auditoria; apenas marcadas
 - / landing publica
 
 - /signup formulario de motorista
+
+- /login formulario de login do motorista
