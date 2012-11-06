@@ -153,3 +153,5 @@ Mensagens enviadas pela central nao sao apagadas para auditoria; apenas marcadas
 
 
 ## Contribuindo
+
+Antes de abrir PR, rode mvn test e mvn package localmente.
