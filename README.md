@@ -157,3 +157,5 @@ Mensagens enviadas pela central nao sao apagadas para auditoria; apenas marcadas
 Antes de abrir PR, rode mvn test e mvn package localmente.
 
 Mantenha mensagens de commit no padrao Conventional Commits.
+
+Codigo deve continuar sem comentarios; nomes claros bastam.
