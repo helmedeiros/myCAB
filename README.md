@@ -161,3 +161,5 @@ Mantenha mensagens de commit no padrao Conventional Commits.
 Codigo deve continuar sem comentarios; nomes claros bastam.
 
 
+
+## Licenca
