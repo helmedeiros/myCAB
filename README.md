@@ -163,3 +163,5 @@ Codigo deve continuar sem comentarios; nomes claros bastam.
 
 
 ## Licenca
+
+Uso interno.
