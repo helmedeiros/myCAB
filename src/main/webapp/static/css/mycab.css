@@ -139,7 +139,7 @@ h1 {
 .badge {
     display: inline-block;
     padding: 3px 10px;
-    border-radius: 12px;
+    border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
