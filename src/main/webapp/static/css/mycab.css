@@ -207,6 +207,7 @@ h1 {
 }
 
 .alert {
+    font-size: 14px;
     background-color: #fde6e1;
     border: 1px solid #f49a4f;
     border-radius: 4px;
