@@ -167,3 +167,4 @@ Codigo deve continuar sem comentarios; nomes claros bastam.
 Uso interno.
 
 ## Roadmap futuro
+Suporte a multiplas cidades via tabela City.
