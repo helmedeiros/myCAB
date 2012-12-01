@@ -168,3 +168,5 @@ Uso interno.
 
 ## Roadmap futuro
 Suporte a multiplas cidades via tabela City.
+
+Integracao com mensagens SMS para clientes sem internet.
