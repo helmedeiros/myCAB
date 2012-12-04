@@ -170,3 +170,5 @@ Uso interno.
 Suporte a multiplas cidades via tabela City.
 
 Integracao com mensagens SMS para clientes sem internet.
+
+Relatorio de despachos por mes em CSV.
