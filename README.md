@@ -174,3 +174,4 @@ Integracao com mensagens SMS para clientes sem internet.
 Relatorio de despachos por mes em CSV.
 
 ## Acessos rapidos
+Operador padrao usa /operator; nao requer login no MVP.
