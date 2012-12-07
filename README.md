@@ -177,3 +177,5 @@ Relatorio de despachos por mes em CSV.
 Operador padrao usa /operator; nao requer login no MVP.
 
 Cadastro sem login: /signup e listagens publicas.
+
+## Suporte
