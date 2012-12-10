@@ -179,3 +179,4 @@ Operador padrao usa /operator; nao requer login no MVP.
 Cadastro sem login: /signup e listagens publicas.
 
 ## Suporte
+Issues e sugestoes pelo repositorio interno.
