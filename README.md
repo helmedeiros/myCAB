@@ -180,3 +180,5 @@ Cadastro sem login: /signup e listagens publicas.
 
 ## Suporte
 Issues e sugestoes pelo repositorio interno.
+
+Contato pelo email da equipe interna.
