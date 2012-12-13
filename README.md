@@ -184,3 +184,4 @@ Issues e sugestoes pelo repositorio interno.
 Contato pelo email da equipe interna.
 
 ## Versao
+0.1.0 - cadastros, frota, despachos, dispositivos.
