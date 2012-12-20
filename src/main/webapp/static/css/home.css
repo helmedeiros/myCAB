@@ -111,6 +111,7 @@ body.home {
 
 .home-wrap .safety a {
     color: #7f7f7f;
+    font-size: 14px;
     text-decoration: none;
     font-weight: 600;
 }
