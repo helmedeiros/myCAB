@@ -187,3 +187,4 @@ Contato pelo email da equipe interna.
 0.1.0 - cadastros, frota, despachos, dispositivos.
 
 ## Atribuicoes de erro
+Erros de dominio retornam pagina dedicada nas rotas operadoras.
