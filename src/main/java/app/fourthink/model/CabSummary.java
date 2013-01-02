@@ -25,7 +25,7 @@ public final class CabSummary {
 
     public static CabSummary of(Cab cab) {
         return new CabSummary(cab.getId(), cab.getPlate().getValue(),
-                cab.getModel().displayName(), cab.getModel().getCategory(),
+                cab.getModel().getDisplayName(), cab.getModel().getCategory(),
                 cab.getStatus());
     }
 }

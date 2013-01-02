@@ -24,6 +24,6 @@ public class CabModelTest {
     @Test
     public void displayNameCombinesMakeAndModel() {
         CabModel m = new CabModel("Toyota", "Corolla", CabCategory.CONFORTO);
-        assertEquals("Toyota Corolla", m.displayName());
+        assertEquals("Toyota Corolla", m.getDisplayName());
     }
 }

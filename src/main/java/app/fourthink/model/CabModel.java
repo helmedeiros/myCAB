@@ -52,11 +52,11 @@ public class CabModel {
         return category;
     }
 
-    public String displayName() {
+    public String getDisplayName() {
         return make + " " + model;
     }
 
-    public String fullLabel() {
-        return displayName() + " (" + CabKind.label(category) + ")";
+    public String getFullLabel() {
+        return getDisplayName() + " (" + CabKind.label(category) + ")";
     }
 }
