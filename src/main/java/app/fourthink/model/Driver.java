@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +38,14 @@ public class Driver {
     @Enumerated(EnumType.STRING)
     private CabCategory preferredCategory;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DriverStatus status;
+
+    @OneToOne(optional = true)
+    @JoinColumn(name = "cab_id")
+    private Cab cab;
+
     public Driver() {
     }
 
@@ -47,6 +57,7 @@ public class Driver {
         this.licenseNumber = licenseNumber;
         this.passwordHash = passwordHash;
         this.preferredCategory = preferredCategory;
+        this.status = DriverStatus.PENDING;
     }
 
     public Long getId() {
@@ -57,27 +68,72 @@ public class Driver {
         return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Phone getPhone() {
         return new Phone(phone);
     }
 
+    public void setPhone(Phone phone) {
+        this.phone = phone.getValue();
+    }
+
     public String getLicenseNumber() {
         return licenseNumber;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 
     public String getPasswordHash() {
         return passwordHash;
     }
 
+    public CabCategory getPreferredCategory() {
+        return preferredCategory;
+    }
+
+    public void setPreferredCategory(CabCategory preferredCategory) {
+        this.preferredCategory = preferredCategory;
+    }
+
+    public DriverStatus getStatus() {
+        return status;
+    }
+
+    public Cab getCab() {
+        return cab;
+    }
+
+    public void setCab(Cab cab) {
+        this.cab = cab;
+    }
+
     public boolean hasEmail(String candidate) {
         return candidate != null && email.equalsIgnoreCase(candidate);
     }
 
-    public CabCategory getPreferredCategory() {
-        return preferredCategory;
+    public void approve(Cab fleetCab) {
+        if (status == DriverStatus.REJECTED) {
+            throw new IllegalStateException("rejected driver cannot be approved");
+        }
+        this.cab = fleetCab;
+        this.status = DriverStatus.ACTIVE;
+    }
+
+    public void reject() {
+        this.status = DriverStatus.REJECTED;
+        this.cab = null;
     }
 }
