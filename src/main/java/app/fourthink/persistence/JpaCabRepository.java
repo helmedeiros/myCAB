@@ -75,4 +75,16 @@ public class JpaCabRepository implements CabRepository {
         return em.createQuery("select count(c) from Cab c", Long.class)
                 .getSingleResult();
     }
+
+    @Override
+    public Cab findByFleetId(String fleetId) {
+        TypedQuery<Cab> q = em.createQuery(
+                "select c from Cab c where c.fleetId = :f", Cab.class);
+        q.setParameter("f", fleetId);
+        try {
+            return q.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
 }

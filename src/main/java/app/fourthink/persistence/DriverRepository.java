@@ -1,6 +1,8 @@
 package app.fourthink.persistence;
 
+import app.fourthink.model.CabCategory;
 import app.fourthink.model.Driver;
+import app.fourthink.model.DriverStatus;
 
 import java.util.List;
 
@@ -18,5 +20,7 @@ public interface DriverRepository {
 
     long count();
 
-    java.util.List<app.fourthink.model.Driver> findByCategory(app.fourthink.model.CabCategory category);
+    List<Driver> findByCategory(CabCategory category);
+
+    List<Driver> findByStatus(DriverStatus status);
 }

@@ -22,4 +22,6 @@ public interface CabRepository {
     long count();
 
     long countFreeWithLocation();
+
+    Cab findByFleetId(String fleetId);
 }

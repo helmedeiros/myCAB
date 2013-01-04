@@ -61,6 +61,15 @@ public class JpaDriverRepository implements DriverRepository {
         return q.getResultList();
     }
 
+    @Override
+    public List<Driver> findByStatus(app.fourthink.model.DriverStatus status) {
+        TypedQuery<Driver> q = em.createQuery(
+                "select d from Driver d where d.status = :s order by d.fullName",
+                Driver.class);
+        q.setParameter("s", status);
+        return q.getResultList();
+    }
+
     private Driver singleOrNull(String jpql, String value) {
         TypedQuery<Driver> q = em.createQuery(jpql, Driver.class);
         q.setParameter("v", value);
