@@ -36,6 +36,9 @@ public class Cab {
     @Column(name = "lon")
     private Double longitude;
 
+    @Column(name = "fleet_id", unique = true)
+    private String fleetId;
+
     public Cab() {
     }
 
@@ -79,5 +82,25 @@ public class Cab {
     public void updateLocation(Location location) {
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
+    }
+
+    public String getFleetId() {
+        return fleetId;
+    }
+
+    public void setFleetId(String fleetId) {
+        this.fleetId = fleetId;
+    }
+
+    public boolean hasFleetId() {
+        return fleetId != null && !fleetId.trim().isEmpty();
+    }
+
+    public void rePlate(Plate plate) {
+        this.plate = plate.getValue();
+    }
+
+    public void changeModel(CabModel model) {
+        this.model = model;
     }
 }
