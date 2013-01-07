@@ -1,6 +1,7 @@
 package app.fourthink.controllers;
 
 import app.fourthink.model.CabCategory;
+import app.fourthink.persistence.CabModelRepository;
 import app.fourthink.service.DriverSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,15 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DriverSignupController {
 
     private final DriverSignupService service;
+    private final CabModelRepository models;
 
     @Autowired
-    public DriverSignupController(DriverSignupService service) {
+    public DriverSignupController(DriverSignupService service, CabModelRepository models) {
         this.service = service;
+        this.models = models;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String form(Model model) {
         model.addAttribute("categories", CabCategory.values());
+        model.addAttribute("models", models.findAll());
         return "drivers/signup";
     }
 
@@ -33,13 +37,17 @@ public class DriverSignupController {
                          @RequestParam("licenseNumber") String licenseNumber,
                          @RequestParam("password") String password,
                          @RequestParam("preferredCategory") CabCategory preferredCategory,
+                         @RequestParam("plate") String plate,
+                         @RequestParam("modelId") Long modelId,
                          Model model) {
         try {
-            service.signup(fullName, email, phone, licenseNumber, password, preferredCategory);
+            service.signup(fullName, email, phone, licenseNumber, password,
+                    preferredCategory, plate, modelId);
             return "drivers/signup-success";
         } catch (RuntimeException ex) {
             model.addAttribute("error", ex.getMessage());
             model.addAttribute("categories", CabCategory.values());
+            model.addAttribute("models", models.findAll());
             return "drivers/signup";
         }
     }

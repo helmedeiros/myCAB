@@ -1,6 +1,8 @@
 package app.fourthink.service;
 
 import app.fourthink.model.CabCategory;
+import app.fourthink.model.CabModel;
+import app.fourthink.persistence.CabModelRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +28,14 @@ public class DriverLoginServiceTest {
     @Autowired
     private DriverSignupService signup;
 
+    @Autowired
+    private CabModelRepository models;
+
     @Before
     public void setUp() {
+        Long modelId = models.save(new CabModel("Volkswagen", "Gol", CabCategory.NORMAL)).getId();
         signup.signup("Jose Motorista", "jose@example.com", "(51) 99999-0000",
-                "ABC123456", "secret123", CabCategory.NORMAL);
+                "ABC123456", "secret123", CabCategory.NORMAL, "ABC-1234", modelId);
     }
 
     @Test
