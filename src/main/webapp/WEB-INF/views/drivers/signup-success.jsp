@@ -11,8 +11,9 @@
 <div class="navbar"><a class="brand" href="<c:url value='/'/>">myCAB</a></div>
 <div class="container narrow signup-success">
     <div class="success">Cadastro recebido com sucesso.</div>
-    <h1>Pronto para rodar</h1>
-    <p>A central entrara em contato para os proximos passos.</p>
+    <h1>Aguarde aprovacao</h1>
+    <p>A central vai revisar seus dados, conferir seu carro e atribuir um numero de frota. Voce recebera a notificacao por e-mail.</p>
+    <p>Enquanto isso voce pode entrar em <a href="<c:url value='/login'/>">/login</a> para acompanhar.</p>
     <p><a class="btn primary" href="<c:url value='/'/>">Voltar ao inicio</a></p>
 </div>
 </body>

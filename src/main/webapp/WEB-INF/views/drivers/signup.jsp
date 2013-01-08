@@ -13,11 +13,12 @@
 </div>
 <div class="container narrow signup">
     <h1>Seja um motorista</h1>
-    <p class="lead">Cadastre-se e comece a receber chamadas pela central.</p>
+    <p class="lead">Cadastre voce e o seu carro. A central vai revisar e aprovar.</p>
     <c:if test="${not empty error}">
         <div class="alert">${error}</div>
     </c:if>
     <form method="post" action="<c:url value='/signup'/>">
+        <h2>Dados pessoais</h2>
         <label>Nome completo</label>
         <input type="text" name="fullName" required/>
 
@@ -31,12 +32,24 @@
         <input type="text" name="licenseNumber" required/>
 
         <label>Senha</label>
-        <input type="password" name="password" required/>
+        <input type="password" name="password" minlength="6" required/>
 
         <label>Categoria preferida</label>
         <select name="preferredCategory" required>
             <c:forEach var="cat" items="${categories}">
                 <option value="${cat}">${cat}</option>
+            </c:forEach>
+        </select>
+
+        <h2>Seu veiculo</h2>
+
+        <label>Placa</label>
+        <input type="text" name="plate" placeholder="ABC-1234" required/>
+
+        <label>Modelo</label>
+        <select name="modelId" required>
+            <c:forEach var="m" items="${models}">
+                <option value="${m.id}">${m.displayName} (${m.category})</option>
             </c:forEach>
         </select>
 
