@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Carro ${cab.plate.value} - myCAB</title>
+    <title>Frota ${cab.fleetId} - myCAB</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/mycab.css'/>"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
@@ -13,6 +13,14 @@
 <div class="device-frame">
     <header class="device-header">
         <span class="brand">myCAB</span>
+        <c:choose>
+            <c:when test="${not empty cab.fleetId}">
+                <span class="fleet-number">#${cab.fleetId}</span>
+            </c:when>
+            <c:otherwise>
+                <span class="fleet-number pending">sem frota</span>
+            </c:otherwise>
+        </c:choose>
         <span class="plate">${cab.plate.value}</span>
         <span class="badge ${cab.status}">${cab.status}</span>
     </header>
@@ -28,7 +36,8 @@
 
     <section class="location">
         <h2>Atualizar posicao</h2>
-        <form method="post" action="<c:url value='/cab/${cab.id}/location'/>">
+        <c:set var="postUrl" value="${not empty cab.fleetId ? '/fleet/' : '/cab/'}${not empty cab.fleetId ? cab.fleetId : cab.id}/location"/>
+        <form method="post" action="<c:url value='${postUrl}'/>">
             <label>Latitude</label>
             <input type="text" name="latitude" value="${cab.location != null ? cab.location.latitude : ''}" required/>
             <label>Longitude</label>
