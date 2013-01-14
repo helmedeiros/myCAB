@@ -14,6 +14,8 @@
     <ul class="nav">
         <li class="active"><a href="<c:url value='/operator'/>">Central</a></li>
         <li><a href="<c:url value='/cabs'/>">Frota</a></li>
+        <li><a href="<c:url value='/review'/>">Aprovacoes <c:if test="${pendingCount > 0}"><span class="badge REQUESTED">${pendingCount}</span></c:if></a></li>
+        <li><a href="<c:url value='/drivers'/>">Motoristas</a></li>
         <li><a href="<c:url value='/customers'/>">Clientes</a></li>
     </ul>
 </div>
@@ -43,6 +45,18 @@
                 </c:forEach>
                 <c:if test="${empty fleet}"><li>Nenhum carro cadastrado.</li></c:if>
             </ul>
+        </section>
+        <section class="panel">
+            <h2>Aprovacoes pendentes (${pendingCount})</h2>
+            <ul class="pending-list">
+                <c:forEach var="p" items="${pendingDrivers}" end="4">
+                    <li><a href="<c:url value='/review/${p.id}'/>">${p.fullName} (${p.preferredCategory})</a></li>
+                </c:forEach>
+                <c:if test="${empty pendingDrivers}"><li>Nenhum cadastro pendente.</li></c:if>
+            </ul>
+            <c:if test="${pendingCount > 0}">
+                <p><a class="btn primary" href="<c:url value='/review'/>">Abrir fila</a></p>
+            </c:if>
         </section>
         <section class="panel">
             <h2>Clientes recentes</h2>
