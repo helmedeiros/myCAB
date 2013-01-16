@@ -13,6 +13,8 @@
     <ul class="nav">
         <li><a href="<c:url value='/operator'/>">Central</a></li>
         <li><a href="<c:url value='/cabs'/>">Frota</a></li>
+        <li><a href="<c:url value='/review'/>">Aprovacoes</a></li>
+        <li><a href="<c:url value='/drivers'/>">Motoristas</a></li>
         <li><a href="<c:url value='/customers'/>">Clientes</a></li>
         <li class="active"><a href="<c:url value='/models'/>">Modelos</a></li>
     </ul>
