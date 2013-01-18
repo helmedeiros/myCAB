@@ -308,6 +308,79 @@ body.device {
     letter-spacing: 0;
 }
 
+.driver-greeting {
+    padding: 18px 22px 0;
+}
+
+.driver-greeting h2 {
+    font-size: 20px;
+    color: #4d4d4d;
+    margin: 0;
+}
+
+.status-card,
+.pickup-card {
+    margin: 16px 22px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background-color: #fbfaf6;
+    border: 1px solid #ece6d4;
+}
+
+.status-card h3,
+.pickup-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #4d4d4d;
+}
+
+.status-card.pending {
+    background-color: #fff5e6;
+    border-color: #f49a4f;
+}
+
+.status-card.rejected {
+    background-color: #fde6e1;
+    border-color: #d97265;
+}
+
+.status-card.active {
+    background-color: #e7f3e2;
+    border-color: #88b04b;
+}
+
+.pickup-card {
+    background-color: #ffffff;
+    border-color: #4cbfb3;
+    box-shadow: 0 2px 8px rgba(76, 191, 179, 0.18);
+}
+
+.pickup-card .customer-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4d4d4d;
+    margin: 0;
+}
+
+.pickup-card .customer-phone {
+    color: #7f7f7f;
+    margin: 2px 0 10px;
+}
+
+.pickup-card .pickup-address {
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.logout-row {
+    text-align: center;
+    padding: 12px 22px 22px;
+}
+
+.badge.PENDING { background-color: #f49a4f; }
+.badge.ACTIVE { background-color: #88b04b; }
+.badge.REJECTED { background-color: #d97265; }
+
 .device-frame .messages,
 .device-frame .location {
     padding: 18px 22px;
