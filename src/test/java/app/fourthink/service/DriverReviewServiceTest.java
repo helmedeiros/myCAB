@@ -48,37 +48,27 @@ public class DriverReviewServiceTest {
     }
 
     @Test
-    public void approveSetsFleetIdAndActivates() {
+    public void approveGeneratesFleetIdAndActivates() {
         Driver d = signup.signup("Jose", "jose@example.com", "(51) 99999-0000",
                 "ABC123456", "secret123", CabCategory.NORMAL, "ABC-1234", modelId);
-        Driver approved = review.approve(d.getId(), "042");
+        Driver approved = review.approve(d.getId());
         assertEquals(DriverStatus.ACTIVE, approved.getStatus());
-        assertEquals("042", approved.getCab().getFleetId());
+        assertNotNull(approved.getCab().getFleetId());
+        assertEquals(4, approved.getCab().getFleetId().length());
     }
 
     @Test
-    public void approveRejectsBlankFleetId() {
-        Driver d = signup.signup("Jose", "jose@example.com", "(51) 99999-0000",
-                "ABC123456", "secret123", CabCategory.NORMAL, "ABC-1234", modelId);
-        try {
-            review.approve(d.getId(), "  ");
-            fail();
-        } catch (IllegalArgumentException expected) {
-        }
-    }
-
-    @Test
-    public void approveRejectsDuplicateFleetId() {
+    public void approveGivesUniqueFleetIdsToDifferentDrivers() {
         Driver a = signup.signup("Jose", "jose@example.com", "(51) 99999-0000",
                 "ABC123456", "secret123", CabCategory.NORMAL, "ABC-1234", modelId);
-        review.approve(a.getId(), "042");
+        Driver approvedA = review.approve(a.getId());
         Driver b = signup.signup("Maria", "maria@example.com", "(51) 99999-1111",
                 "DEF654321", "secret123", CabCategory.NORMAL, "DEF-5678", modelId);
-        try {
-            review.approve(b.getId(), "042");
-            fail();
-        } catch (IllegalStateException expected) {
-        }
+        Driver approvedB = review.approve(b.getId());
+        assertNotNull(approvedA.getCab().getFleetId());
+        assertNotNull(approvedB.getCab().getFleetId());
+        org.junit.Assert.assertFalse(
+                approvedA.getCab().getFleetId().equals(approvedB.getCab().getFleetId()));
     }
 
     @Test
@@ -101,14 +91,15 @@ public class DriverReviewServiceTest {
     }
 
     @Test
-    public void editVehicleUpdatesPlateAndModel() {
+    public void editVehicleUpdatesPlateModelAndColor() {
         Driver d = signup.signup("Jose", "jose@example.com", "(51) 99999-0000",
                 "ABC123456", "secret123", CabCategory.NORMAL, "ABC-1234", modelId);
         Long otherModel = models.save(new CabModel("Toyota", "Corolla", CabCategory.CONFORTO)).getId();
-        review.editVehicle(d.getId(), "ZZZ-9999", otherModel);
+        review.editVehicle(d.getId(), "ZZZ-9999", otherModel, "branco");
         Driver reloaded = review.get(d.getId());
         assertNotNull(reloaded.getCab());
         assertEquals("ZZZ-9999", reloaded.getCab().getPlate().getValue());
         assertEquals("Toyota", reloaded.getCab().getModel().getMake());
+        assertEquals("branco", reloaded.getCab().getColor());
     }
 }

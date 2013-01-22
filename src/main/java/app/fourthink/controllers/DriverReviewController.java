@@ -52,14 +52,15 @@ public class DriverReviewController {
     @RequestMapping(value = "/{id}/vehicle", method = RequestMethod.POST)
     public String saveVehicle(@PathVariable Long id,
                                @RequestParam("plate") String plate,
-                               @RequestParam("modelId") Long modelId) {
-        review.editVehicle(id, plate, modelId);
+                               @RequestParam("modelId") Long modelId,
+                               @RequestParam(value = "color", required = false) String color) {
+        review.editVehicle(id, plate, modelId, color);
         return "redirect:/review/" + id;
     }
 
     @RequestMapping(value = "/{id}/approve", method = RequestMethod.POST)
-    public String approve(@PathVariable Long id, @RequestParam("fleetId") String fleetId) {
-        review.approve(id, fleetId);
+    public String approve(@PathVariable Long id) {
+        review.approve(id);
         return "redirect:/review";
     }
 

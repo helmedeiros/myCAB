@@ -23,16 +23,18 @@ public class DriverReviewService {
     private DriverRepository drivers;
     private CabRepository cabs;
     private CabModelRepository models;
+    private FleetIdGenerator fleetIds;
 
     public DriverReviewService() {
     }
 
     @Autowired
     public DriverReviewService(DriverRepository drivers, CabRepository cabs,
-                                CabModelRepository models) {
+                                CabModelRepository models, FleetIdGenerator fleetIds) {
         this.drivers = drivers;
         this.cabs = cabs;
         this.models = models;
+        this.fleetIds = fleetIds;
     }
 
     public List<Driver> pending() {
@@ -59,7 +61,7 @@ public class DriverReviewService {
         return drivers.save(d);
     }
 
-    public Driver editVehicle(Long id, String plate, Long modelId) {
+    public Driver editVehicle(Long id, String plate, Long modelId, String color) {
         Driver d = get(id);
         Cab cab = d.getCab();
         if (cab == null) {
@@ -76,24 +78,19 @@ public class DriverReviewService {
             throw new IllegalArgumentException("unknown cab model: " + modelId);
         }
         cab.changeModel(model);
+        cab.setColor(color);
         cabs.save(cab);
         return d;
     }
 
-    public Driver approve(Long id, String fleetId) {
-        if (fleetId == null || fleetId.trim().isEmpty()) {
-            throw new IllegalArgumentException("fleet id is required");
-        }
+    public Driver approve(Long id) {
         Driver d = get(id);
         if (d.getCab() == null) {
             throw new IllegalStateException("driver has no vehicle to approve");
         }
-        String trimmed = fleetId.trim();
-        Cab inUse = cabs.findByFleetId(trimmed);
-        if (inUse != null && !inUse.getId().equals(d.getCab().getId())) {
-            throw new IllegalStateException("fleet id already in use");
+        if (!d.getCab().hasFleetId()) {
+            d.getCab().setFleetId(fleetIds.next());
         }
-        d.getCab().setFleetId(trimmed);
         cabs.save(d.getCab());
         d.approve(d.getCab());
         return drivers.save(d);
