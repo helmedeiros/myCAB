@@ -39,6 +39,9 @@ public class Cab {
     @Column(name = "fleet_id", unique = true)
     private String fleetId;
 
+    @Column(name = "color")
+    private String color;
+
     public Cab() {
     }
 
@@ -46,6 +49,11 @@ public class Cab {
         this.plate = plate.getValue();
         this.model = model;
         this.status = CabStatus.OFFLINE;
+    }
+
+    public Cab(Plate plate, CabModel model, String color) {
+        this(plate, model);
+        this.color = color;
     }
 
     public Long getId() {
@@ -102,5 +110,23 @@ public class Cab {
 
     public void changeModel(CabModel model) {
         this.model = model;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String describe() {
+        StringBuilder sb = new StringBuilder();
+        if (color != null && !color.trim().isEmpty()) {
+            sb.append(color).append(" ");
+        }
+        sb.append(model.getDisplayName());
+        sb.append(", placa ").append(plate);
+        return sb.toString();
     }
 }
