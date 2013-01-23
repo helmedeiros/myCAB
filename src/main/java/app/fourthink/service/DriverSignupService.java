@@ -43,7 +43,16 @@ public class DriverSignupService {
                           String licenseNumber, String password,
                           CabCategory preferredCategory,
                           String plate, Long modelId) {
-        validate(fullName, email, phone, licenseNumber, password, preferredCategory, plate, modelId);
+        return signup(fullName, email, phone, licenseNumber, password,
+                preferredCategory, plate, modelId, null);
+    }
+
+    public Driver signup(String fullName, String email, String phone,
+                          String licenseNumber, String password,
+                          CabCategory preferredCategory,
+                          String plate, Long modelId, String color) {
+        validate(fullName, email, phone, licenseNumber, password,
+                preferredCategory, plate, modelId, color);
         String normalized = email.toLowerCase();
         if (drivers.findByEmail(normalized) != null) {
             throw new IllegalStateException("email already registered");
@@ -59,7 +68,7 @@ public class DriverSignupService {
         if (model == null) {
             throw new IllegalArgumentException("unknown cab model: " + modelId);
         }
-        Cab cab = cabs.save(new Cab(validatedPlate, model));
+        Cab cab = cabs.save(new Cab(validatedPlate, model, color));
         Driver driver = new Driver(fullName, normalized, new Phone(phone),
                 licenseNumber, hasher.hash(password), preferredCategory);
         driver.setCab(cab);
@@ -69,7 +78,7 @@ public class DriverSignupService {
     private void validate(String fullName, String email, String phone,
                            String licenseNumber, String password,
                            CabCategory preferredCategory,
-                           String plate, Long modelId) {
+                           String plate, Long modelId, String color) {
         if (fullName == null || fullName.trim().isEmpty()) {
             throw new IllegalArgumentException("name is required");
         }

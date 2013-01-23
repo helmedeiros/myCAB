@@ -39,10 +39,11 @@ public class DriverSignupController {
                          @RequestParam("preferredCategory") CabCategory preferredCategory,
                          @RequestParam("plate") String plate,
                          @RequestParam("modelId") Long modelId,
+                         @RequestParam(value = "color", required = false) String color,
                          Model model) {
         try {
             service.signup(fullName, email, phone, licenseNumber, password,
-                    preferredCategory, plate, modelId);
+                    preferredCategory, plate, modelId, color);
             return "drivers/signup-success";
         } catch (RuntimeException ex) {
             model.addAttribute("error", ex.getMessage());

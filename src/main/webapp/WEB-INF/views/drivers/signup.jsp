@@ -53,6 +53,9 @@
             </c:forEach>
         </select>
 
+        <label>Cor</label>
+        <input type="text" name="color" placeholder="branco, prata, preto..." required/>
+
         <p>
             <button class="btn primary" type="submit">Cadastrar</button>
             <a class="btn" href="<c:url value='/'/>">Voltar</a>
