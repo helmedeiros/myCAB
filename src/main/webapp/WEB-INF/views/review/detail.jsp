@@ -67,6 +67,9 @@
                             </c:forEach>
                         </select>
 
+                        <label>Cor</label>
+                        <input type="text" name="color" value="${driver.cab.color}" placeholder="branco, prata, preto..."/>
+
                         <p><button class="btn" type="submit">Salvar veiculo</button></p>
                     </form>
                 </c:otherwise>
@@ -76,9 +79,8 @@
         <section class="panel">
             <h2>Decisao</h2>
             <c:if test="${driver.status == 'PENDING'}">
+                <p>Aprovar gera um numero de frota aleatorio automaticamente.</p>
                 <form method="post" action="<c:url value='/review/${driver.id}/approve'/>">
-                    <label>Numero de frota</label>
-                    <input type="text" name="fleetId" placeholder="042" required/>
                     <p><button class="btn primary" type="submit">Aprovar</button></p>
                 </form>
                 <form method="post" action="<c:url value='/review/${driver.id}/reject'/>">
