@@ -26,6 +26,7 @@ public class DispatchService {
     private DispatchRepository dispatches;
     private NearestCabFinder finder;
     private MessagingService messaging;
+    private app.fourthink.persistence.DriverRepository driverRepository;
 
     public DispatchService() {
     }
@@ -33,12 +34,14 @@ public class DispatchService {
     @Autowired
     public DispatchService(CustomerRepository customers, CabRepository cabs,
                             DispatchRepository dispatches, NearestCabFinder finder,
-                            MessagingService messaging) {
+                            MessagingService messaging,
+                            app.fourthink.persistence.DriverRepository driverRepository) {
         this.customers = customers;
         this.cabs = cabs;
         this.dispatches = dispatches;
         this.finder = finder;
         this.messaging = messaging;
+        this.driverRepository = driverRepository;
     }
 
     public Dispatch request(Long customerId, double latitude, double longitude,
@@ -62,10 +65,30 @@ public class DispatchService {
         cab.setStatus(CabStatus.BUSY);
         cabs.save(cab);
         dispatches.save(dispatch);
+        app.fourthink.model.Driver assignedDriver = driverFor(cab);
         messaging.send(RecipientKind.CAB, cab.getId(), buildCabMessage(dispatch));
         messaging.send(RecipientKind.CUSTOMER, dispatch.getCustomer().getId(),
-                "Seu carro " + cab.getPlate().getValue() + " esta a caminho.");
+                buildCustomerMessage(cab, assignedDriver));
         return dispatch;
+    }
+
+    private app.fourthink.model.Driver driverFor(Cab cab) {
+        if (driverRepository == null) return null;
+        for (app.fourthink.model.Driver d : driverRepository.findByStatus(app.fourthink.model.DriverStatus.ACTIVE)) {
+            if (d.getCab() != null && cab.getId().equals(d.getCab().getId())) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    private String buildCustomerMessage(Cab cab, app.fourthink.model.Driver driver) {
+        StringBuilder sb = new StringBuilder("Seu carro esta a caminho. ");
+        if (driver != null) {
+            sb.append("Motorista: ").append(driver.getFullName()).append(". ");
+        }
+        sb.append("Veiculo: ").append(cab.describe()).append(".");
+        return sb.toString();
     }
 
     public Dispatch complete(Long dispatchId) {
