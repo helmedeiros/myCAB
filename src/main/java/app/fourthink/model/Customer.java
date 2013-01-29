@@ -24,6 +24,12 @@ public class Customer {
     @Column(name = "default_address")
     private String defaultAddress;
 
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "password_hash")
+    private String passwordHash;
+
     public Customer() {
     }
 
@@ -31,6 +37,13 @@ public class Customer {
         this.name = name;
         this.phone = phone.getValue();
         this.defaultAddress = defaultAddress;
+    }
+
+    public Customer(String name, Phone phone, String defaultAddress,
+                     String email, String passwordHash) {
+        this(name, phone, defaultAddress);
+        this.email = email;
+        this.passwordHash = passwordHash;
     }
 
     public Long getId() {
@@ -63,5 +76,29 @@ public class Customer {
 
     public void setDefaultAddress(String defaultAddress) {
         this.defaultAddress = defaultAddress;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public boolean canLogin() {
+        return email != null && passwordHash != null;
+    }
+
+    public String getDisplayLabel() {
+        return name + " (" + phone + ")";
     }
 }
