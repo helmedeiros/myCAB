@@ -77,4 +77,21 @@ public class JpaCustomerRepository implements CustomerRepository {
         q.setMaxResults(limit);
         return q.getResultList();
     }
+
+    @Override
+    public long countActive() {
+        return em.createQuery("select count(c) from Customer c", Long.class).getSingleResult();
+    }
+
+    @Override
+    public Customer findByEmail(String email) {
+        TypedQuery<Customer> q = em.createQuery(
+                "select c from Customer c where lower(c.email) = :e", Customer.class);
+        q.setParameter("e", email.toLowerCase());
+        try {
+            return q.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
 }

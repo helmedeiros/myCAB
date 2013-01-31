@@ -16,9 +16,13 @@ public interface CustomerRepository {
 
     Customer findByPhone(String phone);
 
+    Customer findByEmail(String email);
+
     void delete(Customer customer);
 
     long count();
 
-    java.util.List<app.fourthink.model.Customer> findRecent(int limit);
+    long countActive();
+
+    List<Customer> findRecent(int limit);
 }
