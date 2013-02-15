@@ -40,6 +40,13 @@
         <a href="#"><span class="shield"></span>Aprenda sobre seguranca</a>
     </p>
 
+    <p class="customer-cta">
+        Voce e cliente?
+        <a href="<c:url value='/customer-login'/>">Entrar</a>
+        ou
+        <a href="<c:url value='/customer-signup'/>">criar conta</a>
+    </p>
+
     <footer>
         <a href="#">Seguranca</a>
         <span>&middot;</span>
