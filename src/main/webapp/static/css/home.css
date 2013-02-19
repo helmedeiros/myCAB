@@ -127,6 +127,19 @@ body.home {
     margin-right: 6px;
 }
 
+.home-wrap .customer-cta {
+    margin-top: 18px;
+    color: #7f7f7f;
+    font-size: 14px;
+}
+
+.home-wrap .customer-cta a {
+    color: #4cbfb3;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 4px;
+}
+
 .home-wrap footer {
     margin-top: 50px;
     padding-bottom: 30px;
