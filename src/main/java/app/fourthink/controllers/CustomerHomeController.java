@@ -1,5 +1,6 @@
 package app.fourthink.controllers;
 
+import app.fourthink.config.FlowConfig;
 import app.fourthink.model.Customer;
 import app.fourthink.model.Dispatch;
 import app.fourthink.model.DispatchStatus;
@@ -26,13 +27,15 @@ public class CustomerHomeController {
     private final CustomerRepository customers;
     private final DispatchService dispatches;
     private final DriverRepository drivers;
+    private final FlowConfig flows;
 
     @Autowired
     public CustomerHomeController(CustomerRepository customers, DispatchService dispatches,
-                                   DriverRepository drivers) {
+                                   DriverRepository drivers, FlowConfig flows) {
         this.customers = customers;
         this.dispatches = dispatches;
         this.drivers = drivers;
+        this.flows = flows;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -42,6 +45,7 @@ public class CustomerHomeController {
         }
         Customer customer = customers.findById(SessionGate.customerId(session));
         model.addAttribute("customer", customer);
+        model.addAttribute("flows", flows);
         List<Dispatch> history = dispatches.forCustomer(customer.getId());
         model.addAttribute("history", history);
         Dispatch active = null;
