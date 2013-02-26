@@ -51,7 +51,34 @@
         <c:otherwise>
             <section class="status-card waiting">
                 <h3>Sem chamada ativa</h3>
-                <p>Em breve voce vai poder pedir um carro direto pelo aplicativo. Por enquanto, ligue para a central.</p>
+                <c:choose>
+                    <c:when test="${flows.anyEnabled}">
+                        <p>Como voce quer pedir um carro?</p>
+                        <div class="flow-actions">
+                            <c:if test="${flows.autoDispatchEnabled}">
+                                <form method="post" action="<c:url value='/me/auto'/>">
+                                    <button class="btn primary" type="submit">Pedir agora</button>
+                                </form>
+                                <small>Sistema escolhe e o motorista aceita.</small>
+                            </c:if>
+                            <c:if test="${flows.requestEnabled}">
+                                <form method="post" action="<c:url value='/me/request'/>">
+                                    <button class="btn" type="submit">Mandar pedido para a central</button>
+                                </form>
+                                <small>A central confirma um carro proximo.</small>
+                            </c:if>
+                            <c:if test="${flows.phoneCallEnabled}">
+                                <form method="post" action="<c:url value='/me/call-operator'/>">
+                                    <button class="btn" type="submit">Falar com a central</button>
+                                </form>
+                                <small>Notifica a central para te ligar.</small>
+                            </c:if>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <p>O pedido pelo aplicativo nao esta disponivel nesta cidade. Ligue para a central.</p>
+                    </c:otherwise>
+                </c:choose>
             </section>
         </c:otherwise>
     </c:choose>
