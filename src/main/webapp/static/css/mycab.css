@@ -377,6 +377,21 @@ body.device {
     padding: 12px 22px 22px;
 }
 
+.flow-actions {
+    margin-top: 10px;
+}
+
+.flow-actions form {
+    margin-top: 12px;
+}
+
+.flow-actions small {
+    display: block;
+    color: #7f7f7f;
+    margin-top: 4px;
+    font-size: 12px;
+}
+
 .badge.PENDING { background-color: #f49a4f; }
 .badge.ACTIVE { background-color: #88b04b; }
 .badge.REJECTED { background-color: #d97265; }
