@@ -37,6 +37,9 @@ public class Message {
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
+    @Column(name = "source_customer_id")
+    private Long sourceCustomerId;
+
     public Message() {
     }
 
@@ -46,6 +49,12 @@ public class Message {
         this.body = body;
         this.read = false;
         this.createdAt = new Date();
+    }
+
+    public Message(RecipientKind recipientKind, Long recipientId, String body,
+                    Long sourceCustomerId) {
+        this(recipientKind, recipientId, body);
+        this.sourceCustomerId = sourceCustomerId;
     }
 
     public Long getId() {
@@ -74,5 +83,9 @@ public class Message {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public Long getSourceCustomerId() {
+        return sourceCustomerId;
     }
 }
