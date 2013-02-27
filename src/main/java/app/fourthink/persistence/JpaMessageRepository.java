@@ -27,6 +27,22 @@ public class JpaMessageRepository implements MessageRepository {
     }
 
     @Override
+    public Message findById(Long id) {
+        return em.find(Message.class, id);
+    }
+
+    @Override
+    public List<Message> findUnreadCalls(Long recipientId) {
+        TypedQuery<Message> q = em.createQuery(
+                "select m from Message m where m.recipientKind = :k and m.recipientId = :i " +
+                        "and m.read = false and m.sourceCustomerId is not null " +
+                        "order by m.createdAt asc", Message.class);
+        q.setParameter("k", app.fourthink.model.RecipientKind.OPERATOR);
+        q.setParameter("i", recipientId);
+        return q.getResultList();
+    }
+
+    @Override
     public List<Message> findUnread(RecipientKind kind, Long recipientId) {
         TypedQuery<Message> q = em.createQuery(
                 "select m from Message m where m.recipientKind = :k and m.recipientId = :i " +
