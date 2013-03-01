@@ -28,10 +28,14 @@ public class MessagingService {
     }
 
     public Message send(RecipientKind kind, Long recipientId, String body) {
+        return send(kind, recipientId, body, null);
+    }
+
+    public Message send(RecipientKind kind, Long recipientId, String body, Long sourceCustomerId) {
         if (body == null || body.trim().isEmpty()) {
             throw new IllegalArgumentException("message body required");
         }
-        return messages.save(new Message(kind, recipientId, body.trim()));
+        return messages.save(new Message(kind, recipientId, body.trim(), sourceCustomerId));
     }
 
     public boolean hasUnread(RecipientKind kind, Long recipientId) {
@@ -61,5 +65,18 @@ public class MessagingService {
 
     public List<Message> recent(RecipientKind kind, Long recipientId, int limit) {
         return messages.findRecent(kind, recipientId, limit);
+    }
+
+    public List<Message> pendingOperatorCalls(Long operatorId) {
+        return messages.findUnreadCalls(operatorId);
+    }
+
+    public Message markRead(Long messageId) {
+        Message m = messages.findById(messageId);
+        if (m == null) {
+            throw new IllegalArgumentException("unknown message: " + messageId);
+        }
+        m.markRead();
+        return messages.save(m);
     }
 }
