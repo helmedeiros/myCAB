@@ -4,6 +4,7 @@ import app.fourthink.model.CabCategory;
 import app.fourthink.model.Dispatch;
 import app.fourthink.service.CustomerService;
 import app.fourthink.service.DispatchService;
+import app.fourthink.service.MessagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +21,14 @@ public class DispatchController {
 
     private final DispatchService dispatches;
     private final CustomerService customers;
+    private final MessagingService messaging;
 
     @Autowired
-    public DispatchController(DispatchService dispatches, CustomerService customers) {
+    public DispatchController(DispatchService dispatches, CustomerService customers,
+                               MessagingService messaging) {
         this.dispatches = dispatches;
         this.customers = customers;
+        this.messaging = messaging;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -35,9 +39,18 @@ public class DispatchController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String form(Model model) {
+    public String form(@RequestParam(value = "customerId", required = false) Long customerId,
+                       @RequestParam(value = "callId", required = false) Long callId,
+                       Model model) {
         model.addAttribute("customers", customers.list());
         model.addAttribute("categories", CabCategory.values());
+        if (customerId != null) {
+            model.addAttribute("customer", customers.get(customerId));
+            model.addAttribute("lockCustomer", true);
+        }
+        if (callId != null) {
+            model.addAttribute("callId", callId);
+        }
         return "dispatches/form";
     }
 
@@ -46,8 +59,12 @@ public class DispatchController {
                          @RequestParam("latitude") double latitude,
                          @RequestParam("longitude") double longitude,
                          @RequestParam(value = "pickupAddress", required = false) String pickupAddress,
-                         @RequestParam("category") CabCategory category) {
+                         @RequestParam("category") CabCategory category,
+                         @RequestParam(value = "callId", required = false) Long callId) {
         Dispatch d = dispatches.request(customerId, latitude, longitude, pickupAddress, category);
+        if (callId != null) {
+            messaging.markRead(callId);
+        }
         return "redirect:/dispatches/" + d.getId();
     }
 
