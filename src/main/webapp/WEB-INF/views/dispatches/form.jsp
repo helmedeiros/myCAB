@@ -11,13 +11,28 @@
 <div class="navbar"><a class="brand" href="<c:url value='/'/>">myCAB</a></div>
 <div class="container narrow">
     <h1>Nova chamada</h1>
+    <c:if test="${lockCustomer && customer != null}">
+        <div class="success">Atendendo chamada de <strong>${customer.name}</strong> (${customer.phone.value}).</div>
+    </c:if>
     <form method="post" action="<c:url value='/dispatches'/>">
+        <c:if test="${callId != null}">
+            <input type="hidden" name="callId" value="${callId}"/>
+        </c:if>
+
         <label>Cliente</label>
-        <select name="customerId" required>
-            <c:forEach var="c" items="${customers}">
-                <option value="${c.id}">${c.name} - ${c.phone.value}</option>
-            </c:forEach>
-        </select>
+        <c:choose>
+            <c:when test="${lockCustomer && customer != null}">
+                <input type="hidden" name="customerId" value="${customer.id}"/>
+                <input type="text" value="${customer.name} - ${customer.phone.value}" disabled/>
+            </c:when>
+            <c:otherwise>
+                <select name="customerId" required>
+                    <c:forEach var="c" items="${customers}">
+                        <option value="${c.id}">${c.name} - ${c.phone.value}</option>
+                    </c:forEach>
+                </select>
+            </c:otherwise>
+        </c:choose>
 
         <label>Latitude</label>
         <input type="text" name="latitude" required/>
@@ -26,7 +41,7 @@
         <input type="text" name="longitude" required/>
 
         <label>Endereco</label>
-        <input type="text" name="pickupAddress" placeholder="Rua, numero, bairro"/>
+        <input type="text" name="pickupAddress" placeholder="Rua, numero, bairro" value="${customer != null ? customer.defaultAddress : ''}"/>
 
         <label>Categoria</label>
         <select name="category" required>
