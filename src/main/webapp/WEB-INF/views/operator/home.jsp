@@ -22,6 +22,26 @@
 <div class="container">
     <h1>Central de operacoes</h1>
 <p>Visao geral em tempo real da frota e das chamadas em andamento.</p>
+    <c:if test="${flows.phoneCallEnabled && not empty operatorCalls}">
+        <section class="panel call-inbox">
+            <h2>Pedidos de contato (${fn:length(operatorCalls)})</h2>
+            <ul class="call-list">
+                <c:forEach var="call" items="${operatorCalls}">
+                    <li>
+                        <div class="call-meta">
+                            <strong>${call.customer.name}</strong>
+                            &middot; ${call.customer.phone.value}
+                            <time>${call.createdAt}</time>
+                        </div>
+                        <div class="call-actions">
+                            <a class="btn primary" href="<c:url value='/dispatches/new?customerId=${call.customer.id}&callId=${call.id}'/>">Atender</a>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </section>
+    </c:if>
+
     <div class="operator-grid">
         <section class="panel">
             <h2>Chamadas ativas</h2>
