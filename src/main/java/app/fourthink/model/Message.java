@@ -40,6 +40,12 @@ public class Message {
     @Column(name = "source_customer_id")
     private Long sourceCustomerId;
 
+    @Column(name = "pickup_address", length = 250)
+    private String pickupAddress;
+
+    @Column(name = "destination_address", length = 250)
+    private String destinationAddress;
+
     public Message() {
     }
 
@@ -55,6 +61,14 @@ public class Message {
                     Long sourceCustomerId) {
         this(recipientKind, recipientId, body);
         this.sourceCustomerId = sourceCustomerId;
+    }
+
+    public Message(RecipientKind recipientKind, Long recipientId, String body,
+                    Long sourceCustomerId,
+                    String pickupAddress, String destinationAddress) {
+        this(recipientKind, recipientId, body, sourceCustomerId);
+        this.pickupAddress = pickupAddress;
+        this.destinationAddress = destinationAddress;
     }
 
     public Long getId() {
@@ -87,5 +101,13 @@ public class Message {
 
     public Long getSourceCustomerId() {
         return sourceCustomerId;
+    }
+
+    public String getPickupAddress() {
+        return pickupAddress;
+    }
+
+    public String getDestinationAddress() {
+        return destinationAddress;
     }
 }
