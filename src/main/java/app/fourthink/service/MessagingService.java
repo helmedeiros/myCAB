@@ -32,10 +32,16 @@ public class MessagingService {
     }
 
     public Message send(RecipientKind kind, Long recipientId, String body, Long sourceCustomerId) {
+        return send(kind, recipientId, body, sourceCustomerId, null, null);
+    }
+
+    public Message send(RecipientKind kind, Long recipientId, String body,
+                         Long sourceCustomerId, String pickupAddress, String destinationAddress) {
         if (body == null || body.trim().isEmpty()) {
             throw new IllegalArgumentException("message body required");
         }
-        return messages.save(new Message(kind, recipientId, body.trim(), sourceCustomerId));
+        return messages.save(new Message(kind, recipientId, body.trim(),
+                sourceCustomerId, pickupAddress, destinationAddress));
     }
 
     public boolean hasUnread(RecipientKind kind, Long recipientId) {
