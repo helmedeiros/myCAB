@@ -68,10 +68,14 @@
                                 <small>A central confirma um carro proximo.</small>
                             </c:if>
                             <c:if test="${flows.phoneCallEnabled}">
-                                <form method="post" action="<c:url value='/me/call-operator'/>">
+                                <form method="post" action="<c:url value='/me/call-operator'/>" class="call-form">
+                                    <label>Origem</label>
+                                    <input type="text" name="pickup" placeholder="Onde voce esta" value="${customer.defaultAddress}" required/>
+                                    <label>Destino</label>
+                                    <input type="text" name="destination" placeholder="Para onde vai" required/>
                                     <button class="btn" type="submit">Falar com a central</button>
                                 </form>
-                                <small>Notifica a central para te ligar.</small>
+                                <small>A central recebe so origem e destino e depois decide aceitar.</small>
                             </c:if>
                         </div>
                     </c:when>
