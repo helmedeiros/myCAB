@@ -30,16 +30,22 @@ public class CallOperatorService {
         this.flows = flows;
     }
 
-    public Message requestCall(Long customerId) {
+    public Message requestCall(Long customerId, String pickup, String destination) {
         if (!flows.isPhoneCallEnabled()) {
             throw new IllegalStateException("call-operator flow is disabled");
+        }
+        if (pickup == null || pickup.trim().isEmpty()) {
+            throw new IllegalArgumentException("pickup address is required");
+        }
+        if (destination == null || destination.trim().isEmpty()) {
+            throw new IllegalArgumentException("destination address is required");
         }
         Customer customer = customers.findById(customerId);
         if (customer == null) {
             throw new IllegalArgumentException("unknown customer: " + customerId);
         }
-        String body = customer.getName() + " (" + customer.getPhone().getValue()
-                + ") pediu para falar com a central.";
-        return messaging.send(RecipientKind.OPERATOR, OPERATOR_INBOX, body, customer.getId());
+        String body = "Pedido anonimo: " + pickup.trim() + " -> " + destination.trim();
+        return messaging.send(RecipientKind.OPERATOR, OPERATOR_INBOX, body,
+                customer.getId(), pickup.trim(), destination.trim());
     }
 }
