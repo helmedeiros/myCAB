@@ -24,17 +24,17 @@
 <p>Visao geral em tempo real da frota e das chamadas em andamento.</p>
     <c:if test="${flows.phoneCallEnabled && not empty operatorCalls}">
         <section class="panel call-inbox">
-            <h2>Pedidos de contato (${fn:length(operatorCalls)})</h2>
+            <h2>Pedidos anonimos (${fn:length(operatorCalls)})</h2>
+            <p class="muted">Decida com base em origem e destino. A identidade do cliente sera revelada apos aceitar.</p>
             <ul class="call-list">
                 <c:forEach var="call" items="${operatorCalls}">
                     <li>
                         <div class="call-meta">
-                            <strong>${call.customer.name}</strong>
-                            &middot; ${call.customer.phone.value}
+                            <span class="trip"><strong>${call.pickup}</strong> &rarr; <strong>${call.destination}</strong></span>
                             <time>${call.createdAt}</time>
                         </div>
                         <div class="call-actions">
-                            <a class="btn primary" href="<c:url value='/dispatches/new?customerId=${call.customer.id}&callId=${call.id}'/>">Atender</a>
+                            <a class="btn primary" href="<c:url value='/operator/calls/${call.id}'/>">Aceitar</a>
                         </div>
                     </li>
                 </c:forEach>
