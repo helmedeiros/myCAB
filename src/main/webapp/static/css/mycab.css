@@ -432,6 +432,16 @@ body.device {
     color: #b5b5b5;
 }
 
+.call-inbox .trip {
+    font-size: 15px;
+}
+
+.call-inbox .muted {
+    color: #7f7f7f;
+    margin: -4px 0 12px;
+    font-size: 13px;
+}
+
 .badge.PENDING { background-color: #f49a4f; }
 .badge.ACTIVE { background-color: #88b04b; }
 .badge.REJECTED { background-color: #d97265; }
