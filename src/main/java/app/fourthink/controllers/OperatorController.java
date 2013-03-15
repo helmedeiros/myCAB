@@ -2,10 +2,8 @@ package app.fourthink.controllers;
 
 import app.fourthink.config.FlowConfig;
 import app.fourthink.model.CabCategory;
-import app.fourthink.model.Customer;
 import app.fourthink.model.Message;
 import app.fourthink.persistence.CabRepository;
-import app.fourthink.persistence.CustomerRepository;
 import app.fourthink.service.CustomerService;
 import app.fourthink.service.DispatchService;
 import app.fourthink.service.DriverReviewService;
@@ -32,21 +30,18 @@ public class OperatorController {
     private final CustomerService customers;
     private final DriverReviewService review;
     private final MessagingService messaging;
-    private final CustomerRepository customerRepository;
     private final FlowConfig flows;
 
     @Autowired
     public OperatorController(DispatchService dispatches, CabRepository cabs,
                                CustomerService customers, DriverReviewService review,
                                MessagingService messaging,
-                               CustomerRepository customerRepository,
                                FlowConfig flows) {
         this.dispatches = dispatches;
         this.cabs = cabs;
         this.customers = customers;
         this.review = review;
         this.messaging = messaging;
-        this.customerRepository = customerRepository;
         this.flows = flows;
     }
 
@@ -72,10 +67,9 @@ public class OperatorController {
         for (Message m : messaging.pendingOperatorCalls(OPERATOR_INBOX)) {
             Map<String, Object> entry = new LinkedHashMap<String, Object>();
             entry.put("id", m.getId());
-            entry.put("body", m.getBody());
             entry.put("createdAt", m.getCreatedAt());
-            Customer customer = customerRepository.findById(m.getSourceCustomerId());
-            entry.put("customer", customer);
+            entry.put("pickup", m.getPickupAddress());
+            entry.put("destination", m.getDestinationAddress());
             out.add(entry);
         }
         return out;
