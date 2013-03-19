@@ -41,6 +41,7 @@ public class DispatchController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String form(@RequestParam(value = "customerId", required = false) Long customerId,
                        @RequestParam(value = "callId", required = false) Long callId,
+                       @RequestParam(value = "pickupAddress", required = false) String pickupAddress,
                        Model model) {
         model.addAttribute("customers", customers.list());
         model.addAttribute("categories", CabCategory.values());
@@ -50,6 +51,9 @@ public class DispatchController {
         }
         if (callId != null) {
             model.addAttribute("callId", callId);
+        }
+        if (pickupAddress != null) {
+            model.addAttribute("prefillPickup", pickupAddress);
         }
         return "dispatches/form";
     }

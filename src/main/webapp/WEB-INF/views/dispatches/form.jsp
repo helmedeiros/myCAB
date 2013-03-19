@@ -41,7 +41,7 @@
         <input type="text" name="longitude" required/>
 
         <label>Endereco</label>
-        <input type="text" name="pickupAddress" placeholder="Rua, numero, bairro" value="${customer != null ? customer.defaultAddress : ''}"/>
+        <input type="text" name="pickupAddress" placeholder="Rua, numero, bairro" value="${not empty prefillPickup ? prefillPickup : (customer != null ? customer.defaultAddress : '')}"/>
 
         <label>Categoria</label>
         <select name="category" required>
