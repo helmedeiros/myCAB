@@ -35,6 +35,12 @@ public class Dispatch {
     @Column(name = "pickup_address")
     private String pickupAddress;
 
+    @Column(name = "destination_address")
+    private String destinationAddress;
+
+    @Column(name = "customer_initiated", nullable = false)
+    private boolean customerInitiated;
+
     @Column(name = "requested_category", nullable = false)
     @Enumerated(EnumType.STRING)
     private CabCategory requestedCategory;
@@ -63,6 +69,15 @@ public class Dispatch {
         this.requestedCategory = requestedCategory;
         this.status = DispatchStatus.REQUESTED;
         this.createdAt = new Date();
+        this.customerInitiated = false;
+    }
+
+    public Dispatch(Customer customer, Location pickup, String pickupAddress,
+                     String destinationAddress, CabCategory requestedCategory,
+                     boolean customerInitiated) {
+        this(customer, pickup, pickupAddress, requestedCategory);
+        this.destinationAddress = destinationAddress;
+        this.customerInitiated = customerInitiated;
     }
 
     public Long getId() {
@@ -79,6 +94,14 @@ public class Dispatch {
 
     public String getPickupAddress() {
         return pickupAddress;
+    }
+
+    public String getDestinationAddress() {
+        return destinationAddress;
+    }
+
+    public boolean isCustomerInitiated() {
+        return customerInitiated;
     }
 
     public CabCategory getRequestedCategory() {
