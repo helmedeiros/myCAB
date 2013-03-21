@@ -58,4 +58,13 @@ public class JpaDispatchRepository implements DispatchRepository {
         q.setParameter("id", customerId);
         return q.getResultList();
     }
+
+    @Override
+    public List<Dispatch> findPendingCustomerRequests() {
+        TypedQuery<Dispatch> q = em.createQuery(
+                "select d from Dispatch d where d.status = :s and d.customerInitiated = true " +
+                        "order by d.createdAt asc", Dispatch.class);
+        q.setParameter("s", DispatchStatus.REQUESTED);
+        return q.getResultList();
+    }
 }
