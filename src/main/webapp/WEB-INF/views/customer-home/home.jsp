@@ -62,10 +62,25 @@
                                 <small>Sistema escolhe e o motorista aceita.</small>
                             </c:if>
                             <c:if test="${flows.requestEnabled}">
-                                <form method="post" action="<c:url value='/me/request'/>">
-                                    <button class="btn" type="submit">Mandar pedido para a central</button>
+                                <form method="post" action="<c:url value='/me/request'/>" class="call-form">
+                                    <label>Origem</label>
+                                    <input type="text" name="pickup" placeholder="Onde voce esta" value="${customer.defaultAddress}" required/>
+                                    <label>Destino</label>
+                                    <input type="text" name="destination" placeholder="Para onde vai" required/>
+                                    <label>Categoria</label>
+                                    <select name="category" required>
+                                        <c:forEach var="cat" items="${categories}">
+                                            <option value="${cat}">${cat}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <label>Sua localizacao (latitude, longitude)</label>
+                                    <div class="coord-row">
+                                        <input type="text" name="latitude" placeholder="-30.0277" required/>
+                                        <input type="text" name="longitude" placeholder="-51.2287" required/>
+                                    </div>
+                                    <button class="btn primary" type="submit">Pedir carro</button>
                                 </form>
-                                <small>A central confirma um carro proximo.</small>
+                                <small>A central recebe um pedido anonimo com seu trajeto.</small>
                             </c:if>
                             <c:if test="${flows.phoneCallEnabled}">
                                 <form method="post" action="<c:url value='/me/call-operator'/>" class="call-form">

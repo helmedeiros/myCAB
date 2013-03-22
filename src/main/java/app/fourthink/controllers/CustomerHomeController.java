@@ -1,6 +1,7 @@
 package app.fourthink.controllers;
 
 import app.fourthink.config.FlowConfig;
+import app.fourthink.model.CabCategory;
 import app.fourthink.model.Customer;
 import app.fourthink.model.Dispatch;
 import app.fourthink.model.DispatchStatus;
@@ -46,6 +47,7 @@ public class CustomerHomeController {
         Customer customer = customers.findById(SessionGate.customerId(session));
         model.addAttribute("customer", customer);
         model.addAttribute("flows", flows);
+        model.addAttribute("categories", CabCategory.values());
         List<Dispatch> history = dispatches.forCustomer(customer.getId());
         model.addAttribute("history", history);
         Dispatch active = null;

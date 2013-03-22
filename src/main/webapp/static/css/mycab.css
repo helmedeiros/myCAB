@@ -392,6 +392,15 @@ body.device {
     font-size: 12px;
 }
 
+.coord-row {
+    display: flex;
+    gap: 8px;
+}
+
+.coord-row input {
+    flex: 1;
+}
+
 .call-inbox {
     margin: 0 0 16px 0;
     padding: 16px 18px;
