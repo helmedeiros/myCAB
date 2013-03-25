@@ -22,6 +22,27 @@
 <div class="container">
     <h1>Central de operacoes</h1>
 <p>Visao geral em tempo real da frota e das chamadas em andamento.</p>
+    <c:if test="${flows.requestEnabled && not empty customerRequests}">
+        <section class="panel call-inbox request-inbox">
+            <h2>Pedidos no app (${fn:length(customerRequests)})</h2>
+            <p class="muted">Decida com base no trajeto e na categoria. A identidade do cliente sera revelada apos aceitar.</p>
+            <ul class="call-list">
+                <c:forEach var="req" items="${customerRequests}">
+                    <li>
+                        <div class="call-meta">
+                            <span class="trip"><strong>${req.pickup}</strong> &rarr; <strong>${req.destination}</strong></span>
+                            <span class="category-tag">${req.category}</span>
+                            <time>${req.createdAt}</time>
+                        </div>
+                        <div class="call-actions">
+                            <a class="btn primary" href="<c:url value='/operator/requests/${req.id}'/>">Aceitar</a>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </section>
+    </c:if>
+
     <c:if test="${flows.phoneCallEnabled && not empty operatorCalls}">
         <section class="panel call-inbox">
             <h2>Pedidos anonimos (${fn:length(operatorCalls)})</h2>
