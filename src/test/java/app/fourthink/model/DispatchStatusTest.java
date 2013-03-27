@@ -7,8 +7,8 @@ import static org.junit.Assert.assertEquals;
 public class DispatchStatusTest {
 
     @Test
-    public void hasFourStates() {
-        assertEquals(4, DispatchStatus.values().length);
+    public void hasFiveStates() {
+        assertEquals(5, DispatchStatus.values().length);
     }
 
     @Test
