@@ -53,6 +53,12 @@ public class Dispatch {
     @JoinColumn(name = "assigned_cab_id")
     private Cab assignedCab;
 
+    @Column(name = "proposed_cab_id")
+    private Long proposedCabId;
+
+    @Column(name = "declined_cab_ids", length = 500)
+    private String declinedCabIds;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
@@ -129,11 +135,55 @@ public class Dispatch {
     }
 
     public void assignTo(Cab cab) {
-        if (status != DispatchStatus.REQUESTED) {
-            throw new IllegalStateException("cannot assign cab outside REQUESTED state");
+        if (status != DispatchStatus.REQUESTED && status != DispatchStatus.PROPOSED) {
+            throw new IllegalStateException("cannot assign cab outside REQUESTED/PROPOSED state");
         }
         this.assignedCab = cab;
+        this.proposedCabId = null;
         this.status = DispatchStatus.ASSIGNED;
+    }
+
+    public void proposeTo(Cab cab) {
+        if (status != DispatchStatus.REQUESTED) {
+            throw new IllegalStateException("can only propose from REQUESTED state");
+        }
+        this.proposedCabId = cab.getId();
+        this.status = DispatchStatus.PROPOSED;
+    }
+
+    public Long getProposedCabId() {
+        return proposedCabId;
+    }
+
+    public void declineProposed() {
+        if (status != DispatchStatus.PROPOSED) {
+            throw new IllegalStateException("only PROPOSED dispatches can be declined");
+        }
+        appendDeclined(proposedCabId);
+        this.proposedCabId = null;
+        this.status = DispatchStatus.REQUESTED;
+    }
+
+    private void appendDeclined(Long cabId) {
+        if (cabId == null) return;
+        if (declinedCabIds == null || declinedCabIds.isEmpty()) {
+            declinedCabIds = cabId.toString();
+        } else {
+            declinedCabIds = declinedCabIds + "," + cabId;
+        }
+    }
+
+    public java.util.List<Long> getDeclinedCabIds() {
+        java.util.List<Long> out = new java.util.ArrayList<Long>();
+        if (declinedCabIds == null || declinedCabIds.isEmpty()) return out;
+        for (String part : declinedCabIds.split(",")) {
+            out.add(Long.parseLong(part));
+        }
+        return out;
+    }
+
+    public int getDeclineCount() {
+        return getDeclinedCabIds().size();
     }
 
     public void complete() {
