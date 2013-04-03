@@ -66,6 +66,23 @@
                 </c:choose>
             </section>
 
+            <c:if test="${proposal != null}">
+                <section class="pickup-card proposal-card">
+                    <h3>Nova corrida disponivel</h3>
+                    <p class="trip"><strong>${proposal.pickupAddress}</strong> &rarr; <strong>${proposal.destinationAddress}</strong></p>
+                    <p>Categoria: <strong>${proposal.requestedCategory}</strong></p>
+                    <p class="muted">Aceite para ver os dados do passageiro.</p>
+                    <div class="proposal-actions">
+                        <form method="post" action="<c:url value='/driver/proposal/${proposal.id}/accept'/>" style="display:inline">
+                            <button class="btn primary" type="submit">Aceitar</button>
+                        </form>
+                        <form method="post" action="<c:url value='/driver/proposal/${proposal.id}/decline'/>" style="display:inline">
+                            <button class="btn" type="submit">Recusar</button>
+                        </form>
+                    </div>
+                </section>
+            </c:if>
+
             <c:if test="${currentDispatch != null}">
                 <section class="pickup-card">
                     <h3>Proximo passageiro</h3>
