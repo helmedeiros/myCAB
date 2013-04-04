@@ -372,6 +372,27 @@ body.device {
     font-size: 15px;
 }
 
+.proposal-card {
+    border-color: #f49a4f;
+    box-shadow: 0 2px 8px rgba(244, 154, 79, 0.18);
+}
+
+.proposal-card .trip {
+    font-size: 16px;
+    margin: 6px 0;
+}
+
+.proposal-card .muted {
+    color: #7f7f7f;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.proposal-actions {
+    display: flex;
+    gap: 10px;
+}
+
 .logout-row {
     text-align: center;
     padding: 12px 22px 22px;
