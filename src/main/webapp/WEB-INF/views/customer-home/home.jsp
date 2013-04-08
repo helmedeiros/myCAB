@@ -53,61 +53,50 @@
                 <h3>Sem chamada ativa</h3>
                 <c:choose>
                     <c:when test="${flows.anyEnabled}">
-                        <p>Como voce quer pedir um carro?</p>
-                        <div class="flow-actions">
-                            <c:if test="${flows.autoDispatchEnabled}">
-                                <form method="post" action="<c:url value='/me/auto'/>" class="call-form">
-                                    <label>Origem</label>
-                                    <input type="text" name="pickup" placeholder="Onde voce esta" value="${customer.defaultAddress}" required/>
-                                    <label>Destino</label>
-                                    <input type="text" name="destination" placeholder="Para onde vai" required/>
-                                    <label>Categoria</label>
-                                    <select name="category" required>
-                                        <c:forEach var="cat" items="${categories}">
-                                            <option value="${cat}">${cat}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <label>Sua localizacao (latitude, longitude)</label>
-                                    <div class="coord-row">
-                                        <input type="text" name="latitude" placeholder="-30.0277" required/>
-                                        <input type="text" name="longitude" placeholder="-51.2287" required/>
-                                    </div>
-                                    <button class="btn primary" type="submit">Pedir agora</button>
-                                </form>
-                                <small>O sistema procura o carro mais proximo e o motorista decide aceitar.</small>
+                        <p>Preencha o trajeto e escolha como quer pedir.</p>
+                        <form method="post" class="request-form" id="request-form">
+                            <label>Origem</label>
+                            <input type="text" name="pickup" placeholder="Onde voce esta" value="${customer.defaultAddress}" required/>
+
+                            <label>Destino</label>
+                            <input type="text" name="destination" placeholder="Para onde vai" required/>
+
+                            <c:if test="${flows.autoDispatchEnabled || flows.requestEnabled}">
+                                <label>Categoria</label>
+                                <select name="category">
+                                    <c:forEach var="cat" items="${categories}">
+                                        <option value="${cat}">${cat}</option>
+                                    </c:forEach>
+                                </select>
+
+                                <label>Sua localizacao (latitude, longitude)</label>
+                                <div class="coord-row">
+                                    <input type="text" name="latitude" placeholder="-30.0277"/>
+                                    <input type="text" name="longitude" placeholder="-51.2287"/>
+                                </div>
                             </c:if>
-                            <c:if test="${flows.requestEnabled}">
-                                <form method="post" action="<c:url value='/me/request'/>" class="call-form">
-                                    <label>Origem</label>
-                                    <input type="text" name="pickup" placeholder="Onde voce esta" value="${customer.defaultAddress}" required/>
-                                    <label>Destino</label>
-                                    <input type="text" name="destination" placeholder="Para onde vai" required/>
-                                    <label>Categoria</label>
-                                    <select name="category" required>
-                                        <c:forEach var="cat" items="${categories}">
-                                            <option value="${cat}">${cat}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <label>Sua localizacao (latitude, longitude)</label>
-                                    <div class="coord-row">
-                                        <input type="text" name="latitude" placeholder="-30.0277" required/>
-                                        <input type="text" name="longitude" placeholder="-51.2287" required/>
-                                    </div>
-                                    <button class="btn primary" type="submit">Pedir carro</button>
-                                </form>
-                                <small>A central recebe um pedido anonimo com seu trajeto.</small>
-                            </c:if>
-                            <c:if test="${flows.phoneCallEnabled}">
-                                <form method="post" action="<c:url value='/me/call-operator'/>" class="call-form">
-                                    <label>Origem</label>
-                                    <input type="text" name="pickup" placeholder="Onde voce esta" value="${customer.defaultAddress}" required/>
-                                    <label>Destino</label>
-                                    <input type="text" name="destination" placeholder="Para onde vai" required/>
-                                    <button class="btn" type="submit">Falar com a central</button>
-                                </form>
-                                <small>A central recebe so origem e destino e depois decide aceitar.</small>
-                            </c:if>
-                        </div>
+
+                            <div class="cta-stack">
+                                <c:if test="${flows.autoDispatchEnabled}">
+                                    <button class="btn primary" type="submit" formaction="<c:url value='/me/auto'/>">
+                                        Pedir agora
+                                    </button>
+                                    <small>O sistema escolhe o carro mais proximo automaticamente.</small>
+                                </c:if>
+                                <c:if test="${flows.requestEnabled}">
+                                    <button class="btn" type="submit" formaction="<c:url value='/me/request'/>">
+                                        Pedir pela central
+                                    </button>
+                                    <small>A central recebe seu pedido anonimo e confirma um carro.</small>
+                                </c:if>
+                                <c:if test="${flows.phoneCallEnabled}">
+                                    <button class="btn ghost" type="submit" formaction="<c:url value='/me/call-operator'/>">
+                                        Falar com a central
+                                    </button>
+                                    <small>A central decide aceitar antes de te identificar.</small>
+                                </c:if>
+                            </div>
+                        </form>
                     </c:when>
                     <c:otherwise>
                         <p>O pedido pelo aplicativo nao esta disponivel nesta cidade. Ligue para a central.</p>
