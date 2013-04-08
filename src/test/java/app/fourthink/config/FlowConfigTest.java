@@ -7,7 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,13 +20,13 @@ public class FlowConfigTest {
     public void loadsDefaultsFromFlowsProperties() {
         assertTrue(config.isPhoneCallEnabled());
         assertTrue(config.isRequestEnabled());
-        assertFalse(config.isAutoDispatchEnabled());
+        assertTrue(config.isAutoDispatchEnabled());
         assertEquals(3, config.getAutoDispatchDeclineCap());
     }
 
     @Test
     public void enabledCountReflectsToggles() {
-        assertEquals(2, config.getEnabledCount());
+        assertEquals(3, config.getEnabledCount());
         assertTrue(config.isAnyEnabled());
     }
 

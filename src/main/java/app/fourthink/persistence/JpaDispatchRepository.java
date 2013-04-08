@@ -67,4 +67,16 @@ public class JpaDispatchRepository implements DispatchRepository {
         q.setParameter("s", DispatchStatus.REQUESTED);
         return q.getResultList();
     }
+
+    @Override
+    public Dispatch findProposedFor(Long cabId) {
+        TypedQuery<Dispatch> q = em.createQuery(
+                "select d from Dispatch d where d.status = :s and d.proposedCabId = :c " +
+                        "order by d.createdAt asc", Dispatch.class);
+        q.setParameter("s", DispatchStatus.PROPOSED);
+        q.setParameter("c", cabId);
+        q.setMaxResults(1);
+        List<Dispatch> result = q.getResultList();
+        return result.isEmpty() ? null : result.get(0);
+    }
 }

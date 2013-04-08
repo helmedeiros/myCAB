@@ -67,13 +67,7 @@ public class DriverHomeController {
     }
 
     private Dispatch findProposalFor(Long cabId) {
-        for (Dispatch d : dispatchRepository.findPendingCustomerRequests()) {
-            if (d.getStatus() == DispatchStatus.PROPOSED
-                    && cabId.equals(d.getProposedCabId())) {
-                return d;
-            }
-        }
-        return null;
+        return dispatchRepository.findProposedFor(cabId);
     }
 
     @RequestMapping(value = "/proposal/{id}/accept", method = RequestMethod.POST)

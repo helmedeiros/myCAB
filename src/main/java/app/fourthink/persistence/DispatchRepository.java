@@ -17,4 +17,6 @@ public interface DispatchRepository {
     List<Dispatch> findByCustomerId(Long customerId);
 
     List<Dispatch> findPendingCustomerRequests();
+
+    Dispatch findProposedFor(Long cabId);
 }
