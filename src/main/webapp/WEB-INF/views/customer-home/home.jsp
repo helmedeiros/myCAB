@@ -131,6 +131,21 @@
 
 <script type="text/javascript">
     setInterval(function() { window.location.reload(); }, 20000);
+    (function() {
+        var form = document.getElementById('request-form');
+        if (!form) return;
+        var preciseFields = form.querySelectorAll('[name="latitude"], [name="longitude"], [name="category"]');
+        var ctas = form.querySelectorAll('[formaction]');
+        for (var i = 0; i < ctas.length; i++) {
+            ctas[i].addEventListener('click', function (ev) {
+                var path = ev.currentTarget.getAttribute('formaction');
+                var precise = path.indexOf('/me/auto') !== -1 || path.indexOf('/me/request') !== -1;
+                for (var j = 0; j < preciseFields.length; j++) {
+                    preciseFields[j].required = precise;
+                }
+            });
+        }
+    })();
 </script>
 </body>
 </html>
