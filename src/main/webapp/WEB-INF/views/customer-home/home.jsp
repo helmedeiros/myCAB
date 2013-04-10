@@ -69,11 +69,16 @@
                                     </c:forEach>
                                 </select>
 
-                                <label>Sua localizacao (latitude, longitude)</label>
-                                <div class="coord-row">
-                                    <input type="text" name="latitude" placeholder="-30.0277"/>
-                                    <input type="text" name="longitude" placeholder="-51.2287"/>
+                                <label>Sua localizacao</label>
+                                <div class="geolocate-row">
+                                    <button class="btn ghost" type="button" id="geolocate-btn">Usar minha localizacao</button>
+                                    <span class="geolocate-status" id="geolocate-status" aria-live="polite"></span>
                                 </div>
+                                <div class="coord-row">
+                                    <input type="text" name="latitude" id="latitude" placeholder="latitude" inputmode="decimal"/>
+                                    <input type="text" name="longitude" id="longitude" placeholder="longitude" inputmode="decimal"/>
+                                </div>
+                                <small class="coord-hint">Se preferir, edite latitude e longitude manualmente.</small>
                             </c:if>
 
                             <div class="cta-stack">
