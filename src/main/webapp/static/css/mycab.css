@@ -422,6 +422,48 @@ body.device {
     flex: 1;
 }
 
+.request-form {
+    margin-top: 8px;
+}
+
+.cta-stack {
+    display: block;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed #d8d2c1;
+}
+
+.cta-stack .btn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    text-align: center;
+    padding: 14px 18px;
+    font-size: 15px;
+}
+
+.cta-stack .btn:first-child {
+    margin-top: 6px;
+}
+
+.cta-stack small {
+    display: block;
+    text-align: center;
+    margin: 4px 0 6px;
+    color: #7f7f7f;
+    font-size: 12px;
+}
+
+.btn.ghost {
+    background-color: transparent;
+    border-color: #b5b5b5;
+    color: #4d4d4d;
+}
+
+.btn.ghost:hover {
+    background-color: #f7f4ed;
+}
+
 .call-inbox {
     margin: 0 0 16px 0;
     padding: 16px 18px;
