@@ -422,6 +422,25 @@ body.device {
     flex: 1;
 }
 
+.geolocate-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0 10px;
+}
+
+.geolocate-status {
+    color: #7f7f7f;
+    font-size: 12px;
+}
+
+.coord-hint {
+    display: block;
+    color: #b5b5b5;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
 .request-form {
     margin-top: 8px;
 }
