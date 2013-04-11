@@ -6,8 +6,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Minha conta - myCAB</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/mycab.css'/>"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 </head>
 <body class="device">
 <div class="device-frame">
@@ -69,16 +71,15 @@
                                     </c:forEach>
                                 </select>
 
-                                <label>Sua localizacao</label>
+                                <label>Onde voce esta</label>
                                 <div class="geolocate-row">
                                     <button class="btn ghost" type="button" id="geolocate-btn">Usar minha localizacao</button>
                                     <span class="geolocate-status" id="geolocate-status" aria-live="polite"></span>
                                 </div>
-                                <div class="coord-row">
-                                    <input type="text" name="latitude" id="latitude" placeholder="latitude" inputmode="decimal"/>
-                                    <input type="text" name="longitude" id="longitude" placeholder="longitude" inputmode="decimal"/>
-                                </div>
-                                <small class="coord-hint">Se preferir, edite latitude e longitude manualmente.</small>
+                                <div id="pickup-map" class="pickup-map"></div>
+                                <input type="hidden" name="latitude" id="latitude"/>
+                                <input type="hidden" name="longitude" id="longitude"/>
+                                <small class="coord-hint">Toque no mapa para marcar o ponto de embarque.</small>
                             </c:if>
 
                             <div class="cta-stack">
