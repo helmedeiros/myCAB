@@ -137,6 +137,31 @@
 <script type="text/javascript">
     setInterval(function() { window.location.reload(); }, 20000);
     (function() {
+        var btn = document.getElementById('geolocate-btn');
+        var status = document.getElementById('geolocate-status');
+        var lat = document.getElementById('latitude');
+        var lon = document.getElementById('longitude');
+        if (!btn || !lat || !lon) return;
+        if (!('geolocation' in navigator)) {
+            btn.disabled = true;
+            status.textContent = 'GPS nao disponivel neste navegador.';
+            return;
+        }
+        btn.addEventListener('click', function () {
+            status.textContent = 'Buscando GPS...';
+            btn.disabled = true;
+            navigator.geolocation.getCurrentPosition(function (pos) {
+                lat.value = pos.coords.latitude.toFixed(6);
+                lon.value = pos.coords.longitude.toFixed(6);
+                status.textContent = 'Localizacao capturada.';
+                btn.disabled = false;
+            }, function (err) {
+                status.textContent = 'Nao consegui ler o GPS. Voce pode digitar manualmente.';
+                btn.disabled = false;
+            }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 });
+        });
+    })();
+    (function() {
         var form = document.getElementById('request-form');
         if (!form) return;
         var preciseFields = form.querySelectorAll('[name="latitude"], [name="longitude"], [name="category"]');
