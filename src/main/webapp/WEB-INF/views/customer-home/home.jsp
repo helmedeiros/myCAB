@@ -138,11 +138,46 @@
 <script type="text/javascript">
     setInterval(function() { window.location.reload(); }, 20000);
     (function() {
-        var btn = document.getElementById('geolocate-btn');
-        var status = document.getElementById('geolocate-status');
+        var mapEl = document.getElementById('pickup-map');
         var lat = document.getElementById('latitude');
         var lon = document.getElementById('longitude');
-        if (!btn || !lat || !lon) return;
+        var btn = document.getElementById('geolocate-btn');
+        var status = document.getElementById('geolocate-status');
+        if (!mapEl || !lat || !lon || typeof L === 'undefined') return;
+
+        var DEFAULT_CENTER = [-30.0277, -51.2287];
+        var map = L.map(mapEl).setView(DEFAULT_CENTER, 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap',
+            maxZoom: 18
+        }).addTo(map);
+        setTimeout(function () { map.invalidateSize(); }, 80);
+
+        var marker = null;
+        function setPin(latitude, longitude) {
+            var ll = L.latLng(latitude, longitude);
+            if (marker) {
+                marker.setLatLng(ll);
+            } else {
+                marker = L.marker(ll, { draggable: true }).addTo(map);
+                marker.on('dragend', function () {
+                    var p = marker.getLatLng();
+                    writeCoords(p.lat, p.lng);
+                });
+            }
+            writeCoords(latitude, longitude);
+        }
+
+        function writeCoords(latitude, longitude) {
+            lat.value = latitude.toFixed(6);
+            lon.value = longitude.toFixed(6);
+        }
+
+        map.on('click', function (ev) {
+            setPin(ev.latlng.lat, ev.latlng.lng);
+        });
+
+        if (!btn) return;
         if (!('geolocation' in navigator)) {
             btn.disabled = true;
             status.textContent = 'GPS nao disponivel neste navegador.';
@@ -152,12 +187,12 @@
             status.textContent = 'Buscando GPS...';
             btn.disabled = true;
             navigator.geolocation.getCurrentPosition(function (pos) {
-                lat.value = pos.coords.latitude.toFixed(6);
-                lon.value = pos.coords.longitude.toFixed(6);
+                setPin(pos.coords.latitude, pos.coords.longitude);
+                map.setView([pos.coords.latitude, pos.coords.longitude], 16);
                 status.textContent = 'Localizacao capturada.';
                 btn.disabled = false;
-            }, function (err) {
-                status.textContent = 'Nao consegui ler o GPS. Voce pode digitar manualmente.';
+            }, function () {
+                status.textContent = 'Nao consegui ler o GPS. Toque no mapa para marcar.';
                 btn.disabled = false;
             }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 });
         });
