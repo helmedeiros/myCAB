@@ -141,6 +141,7 @@
         var mapEl = document.getElementById('pickup-map');
         var lat = document.getElementById('latitude');
         var lon = document.getElementById('longitude');
+        var pickup = document.querySelector('input[name="pickup"]');
         var btn = document.getElementById('geolocate-btn');
         var status = document.getElementById('geolocate-status');
         if (!mapEl || !lat || !lon || typeof L === 'undefined') return;
@@ -154,6 +155,8 @@
         setTimeout(function () { map.invalidateSize(); }, 80);
 
         var marker = null;
+        var lastGeocode = 0;
+
         function setPin(latitude, longitude) {
             var ll = L.latLng(latitude, longitude);
             if (marker) {
@@ -163,6 +166,7 @@
                 marker.on('dragend', function () {
                     var p = marker.getLatLng();
                     writeCoords(p.lat, p.lng);
+                    reverseGeocode(p.lat, p.lng);
                 });
             }
             writeCoords(latitude, longitude);
@@ -173,8 +177,37 @@
             lon.value = longitude.toFixed(6);
         }
 
+        function reverseGeocode(latitude, longitude) {
+            if (!pickup) return;
+            var now = Date.now();
+            if (now - lastGeocode < 900) return;
+            lastGeocode = now;
+            pickup.placeholder = 'Buscando endereco...';
+            $.ajax({
+                url: 'https://nominatim.openstreetmap.org/reverse',
+                data: {
+                    format: 'json',
+                    lat: latitude,
+                    lon: longitude,
+                    zoom: 18,
+                    addressdetails: 1,
+                    'accept-language': 'pt-BR,pt'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var label = data && data.display_name ? data.display_name : '';
+                    if (label) pickup.value = label;
+                    pickup.placeholder = 'Onde voce esta';
+                },
+                error: function () {
+                    pickup.placeholder = 'Onde voce esta';
+                }
+            });
+        }
+
         map.on('click', function (ev) {
             setPin(ev.latlng.lat, ev.latlng.lng);
+            reverseGeocode(ev.latlng.lat, ev.latlng.lng);
         });
 
         if (!btn) return;
@@ -189,6 +222,7 @@
             navigator.geolocation.getCurrentPosition(function (pos) {
                 setPin(pos.coords.latitude, pos.coords.longitude);
                 map.setView([pos.coords.latitude, pos.coords.longitude], 16);
+                reverseGeocode(pos.coords.latitude, pos.coords.longitude);
                 status.textContent = 'Localizacao capturada.';
                 btn.disabled = false;
             }, function () {
