@@ -6,7 +6,9 @@
 <head>
     <meta charset="utf-8"/>
     <title>Central - myCAB</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/mycab.css'/>"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 </head>
 <body>
 <div class="navbar">
@@ -22,6 +24,18 @@
 <div class="container">
     <h1>Central de operacoes</h1>
 <p>Visao geral em tempo real da frota e das chamadas em andamento.</p>
+
+    <section class="ops-map-section">
+        <div id="ops-map" class="ops-map"></div>
+        <div class="ops-map-legend">
+            <span class="dot FREE"></span> Livre
+            <span class="dot BUSY"></span> Ocupado
+            <span class="dot OFFLINE"></span> Offline
+            <span class="dot REQUESTED"></span> Chamada
+            <span class="dot ASSIGNED"></span> Chamada despachada
+        </div>
+    </section>
+
     <c:if test="${flows.requestEnabled && not empty customerRequests}">
         <section class="panel call-inbox request-inbox">
             <h2>Pedidos no app (${fn:length(customerRequests)})</h2>
