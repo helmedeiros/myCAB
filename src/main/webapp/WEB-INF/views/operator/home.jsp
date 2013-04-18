@@ -125,7 +125,86 @@
     </div>
 </div>
 <script>
-    setTimeout(function() { window.location.reload(); }, 15000);
+    setTimeout(function() { window.location.reload(); }, 60000);
+    (function() {
+        var mapEl = document.getElementById('ops-map');
+        if (!mapEl || typeof L === 'undefined') return;
+        var map = L.map(mapEl).setView([-30.0277, -51.2287], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap',
+            maxZoom: 18
+        }).addTo(map);
+        setTimeout(function () { map.invalidateSize(); }, 80);
+
+        var cabMarkers = {};
+        var dispatchMarkers = {};
+        var fitted = false;
+
+        function dotIcon(kind, status) {
+            return L.divIcon({
+                className: 'map-dot ' + kind + ' ' + status,
+                iconSize: [18, 18]
+            });
+        }
+
+        function refresh() {
+            $.getJSON('<c:url value="/api/operator-map"/>', function (data) {
+                var seenCabs = {};
+                var seenDispatches = {};
+                var allPoints = [];
+
+                (data.cabs || []).forEach(function (c) {
+                    seenCabs[c.id] = true;
+                    var pos = [c.lat, c.lon];
+                    allPoints.push(pos);
+                    var label = (c.fleetId ? '#' + c.fleetId + ' &middot; ' : '') + c.plate +
+                        ' <span class="badge ' + c.status + '">' + c.status + '</span>';
+                    if (cabMarkers[c.id]) {
+                        cabMarkers[c.id].setLatLng(pos);
+                        cabMarkers[c.id].setIcon(dotIcon('cab', c.status));
+                        cabMarkers[c.id].setPopupContent(label);
+                    } else {
+                        cabMarkers[c.id] = L.marker(pos, { icon: dotIcon('cab', c.status) })
+                            .addTo(map).bindPopup(label);
+                    }
+                });
+                Object.keys(cabMarkers).forEach(function (id) {
+                    if (!seenCabs[id]) { map.removeLayer(cabMarkers[id]); delete cabMarkers[id]; }
+                });
+
+                (data.dispatches || []).forEach(function (d) {
+                    seenDispatches[d.id] = true;
+                    var pos = [d.lat, d.lon];
+                    allPoints.push(pos);
+                    var name = d.anonymized ? 'Anonimo' : (d.customerName || 'Cliente');
+                    var html = '<strong>' + name + '</strong> <span class="badge ' + d.status + '">' + d.status + '</span><br/>' +
+                        (d.pickupAddress || '') +
+                        (d.destinationAddress ? ' &rarr; ' + d.destinationAddress : '') +
+                        '<br/>Categoria: ' + d.category;
+                    if (dispatchMarkers[d.id]) {
+                        dispatchMarkers[d.id].setLatLng(pos);
+                        dispatchMarkers[d.id].setIcon(dotIcon('dispatch', d.status));
+                        dispatchMarkers[d.id].setPopupContent(html);
+                    } else {
+                        dispatchMarkers[d.id] = L.marker(pos, { icon: dotIcon('dispatch', d.status) })
+                            .addTo(map).bindPopup(html);
+                    }
+                });
+                Object.keys(dispatchMarkers).forEach(function (id) {
+                    if (!seenDispatches[id]) { map.removeLayer(dispatchMarkers[id]); delete dispatchMarkers[id]; }
+                });
+
+                if (!fitted && allPoints.length > 0) {
+                    map.fitBounds(allPoints, { padding: [40, 40], maxZoom: 15 });
+                    fitted = true;
+                }
+            });
+        }
+
+        refresh();
+        setInterval(refresh, 8000);
+    })();
 </script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </body>
 </html>
