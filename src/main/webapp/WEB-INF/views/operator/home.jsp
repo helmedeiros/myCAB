@@ -29,11 +29,12 @@
     <section class="ops-map-section">
         <div id="ops-map" class="ops-map"></div>
         <div class="ops-map-legend">
-            <span class="dot FREE"></span> Livre
-            <span class="dot BUSY"></span> Ocupado
-            <span class="dot OFFLINE"></span> Offline
-            <span class="dot REQUESTED"></span> Chamada
-            <span class="dot ASSIGNED"></span> Chamada despachada
+            <span class="legend-chip cab FREE">L</span> Livre
+            <span class="legend-chip cab BUSY">O</span> Ocupado
+            <span class="legend-chip cab OFFLINE">X</span> Fora do ar
+            <span class="legend-chip dispatch REQUESTED">P</span> Pedido
+            <span class="legend-chip dispatch PROPOSED">C</span> Conferindo
+            <span class="legend-chip dispatch ASSIGNED">A</span> Atribuido
         </div>
     </section>
 
@@ -141,10 +142,17 @@
         var dispatchMarkers = {};
         var fitted = false;
 
+        var LETTERS = {
+            cab:      { FREE: 'L', BUSY: 'O', OFFLINE: 'X' },
+            dispatch: { REQUESTED: 'P', PROPOSED: 'C', ASSIGNED: 'A' }
+        };
+
         function dotIcon(kind, status) {
+            var letter = (LETTERS[kind] && LETTERS[kind][status]) || '?';
             return L.divIcon({
                 className: 'map-dot ' + kind + ' ' + status,
-                iconSize: [18, 18]
+                html: letter,
+                iconSize: [24, 24]
             });
         }
 
