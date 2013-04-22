@@ -468,35 +468,53 @@ body.device {
     color: #7f7f7f;
 }
 
-.ops-map-legend .dot {
+.legend-chip {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 0 4px 0 12px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 4px;
+    margin: 0 6px 0 14px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 20px;
+    text-align: center;
     vertical-align: middle;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
-.ops-map-legend .dot:first-child { margin-left: 0; }
-.ops-map-legend .dot.FREE { background-color: #4cbfb3; }
-.ops-map-legend .dot.BUSY { background-color: #f49a4f; }
-.ops-map-legend .dot.OFFLINE { background-color: #b5b5b5; }
-.ops-map-legend .dot.REQUESTED { background-color: #f08596; }
-.ops-map-legend .dot.ASSIGNED { background-color: #4cbfb3; }
+.ops-map-legend .legend-chip:first-child,
+.legend-chip:first-child { margin-left: 0; }
+
+.legend-chip.cab.FREE,
+.map-dot.cab.FREE,
+.map-dot.dispatch.ASSIGNED,
+.legend-chip.dispatch.ASSIGNED { background-color: #4cbfb3; }
+
+.legend-chip.cab.BUSY,
+.map-dot.cab.BUSY,
+.map-dot.dispatch.PROPOSED,
+.legend-chip.dispatch.PROPOSED { background-color: #f49a4f; }
+
+.legend-chip.cab.OFFLINE,
+.map-dot.cab.OFFLINE { background-color: #b5b5b5; }
+
+.legend-chip.dispatch.REQUESTED,
+.map-dot.dispatch.REQUESTED { background-color: #f08596; }
 
 .map-dot {
-    border-radius: 50%;
+    border-radius: 4px;
     border: 2px solid #ffffff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
 }
 
-.map-dot.cab.FREE { background-color: #4cbfb3; }
-.map-dot.cab.BUSY { background-color: #f49a4f; }
-.map-dot.cab.OFFLINE { background-color: #b5b5b5; }
-.map-dot.dispatch.REQUESTED { background-color: #f08596; }
-.map-dot.dispatch.PROPOSED { background-color: #f49a4f; }
-.map-dot.dispatch.ASSIGNED { background-color: #4cbfb3; }
-.map-dot.dispatch { border-style: dashed; border-color: #ffffff; }
+.map-dot.dispatch { border-style: dashed; }
 
 .request-form {
     margin-top: 8px;
