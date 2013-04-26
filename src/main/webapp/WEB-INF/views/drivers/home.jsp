@@ -6,8 +6,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Painel do motorista - myCAB</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/mycab.css'/>"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 </head>
 <body class="device">
 <div class="device-frame">
@@ -108,6 +110,11 @@
                     <p><a class="btn" href="<c:url value='/fleet/${driver.cab.fleetId}'/>">Abrir tela do carro</a></p>
                 </section>
             </c:if>
+
+            <section class="map-section">
+                <h3>Mapa</h3>
+                <div id="driver-map" class="device-map"></div>
+            </section>
         </c:when>
     </c:choose>
 
@@ -116,17 +123,61 @@
     </form>
 </div>
 
-<c:if test="${driver.status == 'ACTIVE'}">
+<c:if test="${driver.status == 'ACTIVE' && driver.cab != null}">
 <script type="text/javascript">
 (function() {
-    var driverId = ${driver.id};
-    function checkForDispatch() {
-        if (window.location.search.indexOf('reload') === -1 ||
-            performance.now() < 500) {
-            return;
-        }
+    setInterval(function() { window.location.reload(); }, 60000);
+    var mapEl = document.getElementById('driver-map');
+    if (!mapEl || typeof L === 'undefined') return;
+    var snapshotUrl = '<c:url value="/api/cab-map/${driver.cab.id}"/>';
+    var DEFAULT_CENTER = [-30.0277, -51.2287];
+    var map = L.map(mapEl).setView(DEFAULT_CENTER, 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 18
+    }).addTo(map);
+    setTimeout(function () { map.invalidateSize(); }, 80);
+
+    var LETTERS = {
+        cab:      { FREE: 'L', BUSY: 'O', OFFLINE: 'X' },
+        dispatch: { REQUESTED: 'P', PROPOSED: 'C', ASSIGNED: 'A' }
+    };
+    function dotIcon(kind, status) {
+        var letter = (LETTERS[kind] && LETTERS[kind][status]) || '?';
+        return L.divIcon({ className: 'map-dot ' + kind + ' ' + status, html: letter, iconSize: [24, 24] });
     }
-    setInterval(function() { window.location.reload(); }, 20000);
+
+    var cabMarker = null, pickupMarker = null, fitted = false;
+    function refresh() {
+        $.getJSON(snapshotUrl, function (data) {
+            var cab = data && data.cab;
+            var points = [];
+            if (cab && cab.lat != null && cab.lon != null) {
+                var pos = [cab.lat, cab.lon];
+                points.push(pos);
+                if (cabMarker) { cabMarker.setLatLng(pos); cabMarker.setIcon(dotIcon('cab', cab.status)); }
+                else { cabMarker = L.marker(pos, { icon: dotIcon('cab', cab.status) }).addTo(map).bindPopup('Seu carro'); }
+            }
+            var cd = data && data.currentDispatch;
+            if (cd && cd.pickupLat != null) {
+                var pos = [cd.pickupLat, cd.pickupLon];
+                points.push(pos);
+                var html = '<strong>' + (cd.pickupAddress || 'Pickup') + '</strong> <span class="badge ' + cd.status + '">' + cd.status + '</span>';
+                if (cd.destinationAddress) html += '<br/>Destino: ' + cd.destinationAddress;
+                if (cd.customerName) html += '<br/>Passageiro: ' + cd.customerName;
+                if (pickupMarker) { pickupMarker.setLatLng(pos); pickupMarker.setIcon(dotIcon('dispatch', cd.status)); pickupMarker.setPopupContent(html); }
+                else { pickupMarker = L.marker(pos, { icon: dotIcon('dispatch', cd.status) }).addTo(map).bindPopup(html); }
+            } else if (pickupMarker) {
+                map.removeLayer(pickupMarker); pickupMarker = null;
+            }
+            if (!fitted && points.length) {
+                map.fitBounds(L.latLngBounds(points), { padding: [40, 40], maxZoom: 16 });
+                fitted = true;
+            }
+        });
+    }
+    refresh();
+    setInterval(refresh, 8000);
 })();
 </script>
 </c:if>
