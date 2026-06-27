@@ -190,3 +190,7 @@ Contato pelo email da equipe interna.
 Erros de dominio retornam pagina dedicada nas rotas operadoras.
 
 Validacoes de input mostram mensagens em pt-br.
+
+## License
+
+[MIT](LICENSE)
